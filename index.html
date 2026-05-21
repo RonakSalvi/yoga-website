@@ -3,282 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura | Personalized Sanctuary</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
-    
-    <style>
-        :root {
-            --lavender-deep: #6750A4;
-            --lavender-mid: #9575CD;
-            --lavender-soft: #F3E5F5;
-            --lavender-mist: #FDFBFF;
-            --glass: rgba(255, 255, 255, 0.9);
-            --text-main: #2D2438;
-            --radius-lg: 32px;
-            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Inter', sans-serif; background: var(--lavender-mist); color: var(--text-main); overflow-x: hidden; }
-
-        /* --- Entry Portal --- */
-        #entry-portal {
-            position: fixed; inset: 0; background: var(--lavender-soft);
-            display: flex; align-items: center; justify-content: center; z-index: 5000;
-            transition: var(--transition);
-        }
-        .portal-card { text-align: center; max-width: 400px; padding: 40px; }
-        .portal-card h1 { font-size: 42px; margin-bottom: 20px; color: var(--lavender-deep); }
-
-        /* --- Main Layout --- */
-        .app-container { display: none; opacity: 0; transition: 1s; padding-bottom: 120px; }
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 10%, rgba(243, 229, 245, 0.8) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        /* --- Header & Nav --- */
-        header { padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Playfair Display'; font-size: 28px; font-style: italic; color: var(--lavender-deep); }
-
-        .view { display: none; padding: 0 5%; animation: fadeIn 0.8s ease forwards; }
-        .view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- Dashboard Perspective --- */
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .stat-card { background: white; padding: 20px; border-radius: 24px; border: 1px solid var(--lavender-soft); }
-        .stat-card h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; margin-bottom: 10px; }
-        .stat-card p { font-size: 24px; font-weight: 600; color: var(--lavender-deep); }
-
-        /* --- Calendar UI --- */
-        .calendar-box { background: white; padding: 25px; border-radius: var(--radius-lg); margin: 30px 0; box-shadow: 0 10px 30px rgba(103, 80, 164, 0.05); }
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 15px; text-align: center; }
-        .cal-head { font-size: 10px; font-weight: 700; opacity: 0.4; padding-bottom: 10px; }
-        .cal-date { padding: 10px 0; font-size: 13px; border-radius: 50%; cursor: pointer; }
-        .cal-date.active { background: var(--lavender-deep); color: white; }
-
-        /* --- Bottom Nav --- */
-        .bottom-nav {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 500px; height: 75px;
-            background: var(--glass); backdrop-filter: blur(20px);
-            border-radius: 100px; display: flex; justify-content: space-around;
-            align-items: center; z-index: 4000; box-shadow: 0 20px 40px rgba(103, 80, 164, 0.15);
-            border: 1px solid white;
-        }
-        .nav-item { background: none; border: none; display: flex; flex-direction: column; align-items: center; opacity: 0.4; cursor: pointer; transition: 0.3s; }
-        .nav-item.active { opacity: 1; color: var(--lavender-deep); }
-        .nav-item span { font-size: 24px; }
-        .nav-item small { font-size: 9px; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
-
-        /* --- Floating Player --- */
-        .aura-player {
-            position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(200px);
-            width: 85%; max-width: 400px; background: white; padding: 15px 25px;
-            border-radius: 100px; display: flex; align-items: center; gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 3000; transition: var(--transition);
-        }
-        .aura-player.visible { transform: translateX(-50%) translateY(0); }
-
-        /* --- Inputs & Buttons --- */
-        input { width: 100%; padding: 18px; border-radius: 15px; border: 1px solid var(--lavender-soft); margin-bottom: 20px; outline: none; text-align: center; font-size: 18px; }
-        .btn-aura { background: var(--lavender-deep); color: white; border: none; padding: 16px 40px; border-radius: 100px; font-family: 'Playfair Display'; font-size: 18px; cursor: pointer; }
-    </style>
+    <title>[Your Name] Yoga Workshops</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Poppins for headings, Open Sans for body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
-    <!-- PORTAL: ASK FOR NAME -->
-    <div id="entry-portal">
-        <div class="portal-card">
-            <h1>Namaste.</h1>
-            <p style="margin-bottom: 30px; opacity: 0.7;">Welcome to your digital sanctuary. <br>What is your name?</p>
-            <input type="text" id="userNameInput" placeholder="Enter your name">
-            <button class="btn-aura" onclick="enterSanctuary()">Enter Aura</button>
+    <header class="hero">
+        <div class="container">
+            <img src="images/your-logo.png" alt="Your Logo" class="logo"> <!-- Optional: Replace with your logo -->
+            <h1>[Your Name] Yoga</h1>
+            <p class="tagline">Bringing Mindful Movement to Your Space</p>
+            <a href="#contact" class="btn-primary">Book a Workshop</a>
         </div>
-    </div>
+    </header>
 
-    <!-- MAIN APP -->
-    <div class="app-container" id="app">
-        <header>
-            <div class="logo">Aura</div>
-            <div id="admin-trigger" onclick="unlockAdmin()" style="opacity: 0.2; cursor: pointer;">
-                <span class="material-symbols-outlined">shield_person</span>
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="images/your-headshot.jpg" alt="Your Headshot" class="headshot"> <!-- Optional: Replace with your headshot -->
+                <p>Hi, I'm [Your Name]! I'm a certified yoga instructor passionate about creating accessible and empowering workshops tailored to your group's unique needs and goals.</p>
+                <p>My aim is to foster well-being, reduce stress, and build community through the transformative power of yoga, making it enjoyable for participants of all levels.</p>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <!-- VIEW: SANCTUARY -->
-        <main id="view-sanctuary" class="view active">
-            <h2 style="font-size: 36px; margin-bottom: 10px;">Hello, <span id="display-name">Seeker</span>.</h2>
-            <p style="opacity: 0.6; margin-bottom: 40px;">Your energy is welcome here today.</p>
-            
-            <div class="calendar-box">
-                <h4 style="font-family: 'Inter'; font-size: 14px;">May 2024</h4>
-                <div class="cal-grid" id="calendar">
-                    <div class="cal-head">M</div><div class="cal-head">T</div><div class="cal-head">W</div><div class="cal-head">T</div><div class="cal-head">F</div><div class="cal-head">S</div><div class="cal-head">S</div>
-                    <!-- Dates injected by JS -->
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <h2>My Workshops</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3><i class="fas fa-building"></i> Corporate Wellness</h3>
+                    <p>Boost team morale, reduce stress, and improve focus with tailored sessions for your workplace.</p>
+                </div>
+                <div class="service-item">
+                    <h3><i class="fas fa-users"></i> Private Groups</h3>
+                    <p>Perfect for celebrations, retreats, or intimate gatherings. Custom flows for any occasion.</p>
+                </div>
+                <div class="service-item">
+                    <h3><i class="fas fa-calendar-alt"></i> Community Events</h3>
+                    <p>Add a mindful element to festivals, local gatherings, or special community projects.</p>
+                </div>
+                <div class="service-item">
+                    <h3><i class="fas fa-leaf"></i> Specialized Sessions</h3>
+                    <p>Gentle Yoga, Vinyasa Flow, Restorative, Meditation – designed to meet specific needs.</p>
                 </div>
             </div>
+            <p class="services-cta">Each workshop is custom-designed to promote relaxation, increase focus, and enhance physical and mental well-being for participants of all levels.</p>
+        </div>
+    </section>
 
-            <h3>Today's Flows</h3>
-            <div style="background:white; padding:20px; border-radius:20px; margin-top:15px; display:flex; align-items:center; gap:15px;">
-                <div style="background:var(--lavender-soft); width:50px; height:50px; border-radius:15px; display:flex; align-items:center; justify-content:center; color:var(--lavender-deep); font-weight:bold;">18:00</div>
-                <div>
-                    <p style="font-weight:600;">Sunset Vinyasa</p>
-                    <small style="opacity:0.5;">60 mins • Master Flow</small>
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <span class="step-number">1</span>
+                    <h3>Inquire</h3>
+                    <p>Tell me about your group, desired date, location, and specific needs through the contact form below.</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">2</span>
+                    <h3>Customize</h3>
+                    <p>We'll collaborate to design the perfect workshop experience, ensuring it aligns with your vision.</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">3</span>
+                    <h3>Flow</h3>
+                    <p>Enjoy a rejuvenating and memorable yoga session, expertly led in your chosen environment.</p>
                 </div>
             </div>
-        </main>
-
-        <!-- VIEW: BOOKING -->
-        <main id="view-booking" class="view">
-            <h2 style="text-align:center; margin-bottom: 30px;">Reserve a Mat</h2>
-            <div style="background:white; padding:40px 20px; border-radius:32px; text-align:center;">
-                <div style="width:80px; height:2px; background:var(--lavender-deep); margin:0 auto 40px; opacity:0.3;"></div>
-                <div class="cal-grid" style="grid-template-columns: repeat(5, 1fr); max-width:300px; margin:0 auto;" id="matGrid"></div>
-                <button id="bookBtn" class="btn-aura" style="margin-top:40px; display:none;" onclick="alert('Confirmed!')">Confirm Spot</button>
-            </div>
-        </main>
-
-        <!-- VIEW: ZEN DEN -->
-        <main id="view-zen" class="view">
-            <h2 style="margin-bottom: 30px;">Zen Library</h2>
-            <div style="background:white; padding:20px; border-radius:20px; margin-bottom:15px; display:flex; align-items:center; gap:20px; cursor:pointer;" onclick="playTrack('Morning Lavender', '12:00')">
-                <span class="material-symbols-outlined" style="color:var(--lavender-deep); font-size:40px;">play_circle</span>
-                <div><p style="font-weight:600;">Morning Lavender</p><small>Ambient • 432Hz</small></div>
-            </div>
-            <div style="background:white; padding:20px; border-radius:20px; margin-bottom:15px; display:flex; align-items:center; gap:20px; cursor:pointer;" onclick="playTrack('Deep Violet Sleep', '30:00')">
-                <span class="material-symbols-outlined" style="color:var(--lavender-deep); font-size:40px;">play_circle</span>
-                <div><p style="font-weight:600;">Deep Violet Sleep</p><small>Binaural Beats</small></div>
-            </div>
-        </main>
-
-        <!-- VIEW: ADMIN DASHBOARD (HIDDEN) -->
-        <main id="view-admin" class="view">
-            <h2 style="color:var(--lavender-deep);">Studio Dashboard</h2>
-            <p style="opacity:0.6; margin-bottom:30px;">Internal Management Perspective</p>
-            
-            <div class="stat-grid">
-                <div class="stat-card"><h4>Active Students</h4><p>128</p></div>
-                <div class="stat-card"><h4>Mat Occupancy</h4><p>84%</p></div>
-                <div class="stat-card"><h4>Zen Den Plays</h4><p>1.2k</p></div>
-                <div class="stat-card"><h4>Revenue (MTD)</h4><p>$4.2k</p></div>
-            </div>
-
-            <h3 style="margin: 30px 0 15px;">Recent Bookings</h3>
-            <div id="admin-logs" style="background:white; border-radius:20px; padding:10px;">
-                <div style="padding:15px; border-bottom:1px solid #f5f5f5; font-size:13px;"><b>Sarah J.</b> reserved Mat #4 <small style="float:right; opacity:0.5;">2m ago</small></div>
-                <div style="padding:15px; border-bottom:1px solid #f5f5f5; font-size:13px;"><b>Mike R.</b> joined Zen Den <small style="float:right; opacity:0.5;">15m ago</small></div>
-            </div>
-        </main>
-    </div>
-
-    <!-- FLOATING PLAYER -->
-    <div id="player" class="aura-player">
-        <span class="material-symbols-outlined" style="color:var(--lavender-deep)">graphic_eq</span>
-        <div style="flex-grow:1;">
-            <p id="p-name" style="font-size:13px; font-weight:600;">Track Name</p>
-            <small id="p-time" style="font-size:10px; opacity:0.5;">00:00</small>
         </div>
-        <button onclick="document.getElementById('player').classList.remove('visible')" style="background:none; border:none; cursor:pointer;"><span class="material-symbols-outlined">close</span></button>
-    </div>
+    </section>
 
-    <!-- BOTTOM NAVIGATION -->
-    <nav class="bottom-nav" id="mainNav">
-        <button class="nav-item active" onclick="showView('sanctuary', this)">
-            <span class="material-symbols-outlined">spa</span><small>Sanctuary</small>
-        </button>
-        <button class="nav-item" onclick="showView('booking', this)">
-            <span class="material-symbols-outlined">calendar_month</span><small>Book</small>
-        </button>
-        <button class="nav-item" onclick="showView('zen', this)">
-            <span class="material-symbols-outlined">library_music</span><small>Zen Den</small>
-        </button>
-        <!-- Dashboard Button (Hidden by default) -->
-        <button id="nav-admin" class="nav-item" style="display:none;" onclick="showView('admin', this)">
-            <span class="material-symbols-outlined">dashboard</span><small>Admin</small>
-        </button>
-    </nav>
+    <section id="testimonials" class="section bg-light">
+        <div class="container">
+            <h2>What Clients Say</h2>
+            <div class="testimonial-item">
+                <p>"[Your Name]'s corporate session was a game-changer for our team. Everyone left feeling refreshed and focused!"</p>
+                <cite>– Sarah M., Office Manager</cite>
+            </div>
+            <div class="testimonial-item">
+                <p>"The perfect addition to our wellness retreat. Professional, calming, and truly inspiring. Highly recommend!"</p>
+                <cite>– David L., Event Organizer</cite>
+            </div>
+        </div>
+    </section>
 
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p class="contact-intro">Ready to bring mindful movement to your event or team? I'd love to hear from you!</p>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+            </div>
+            <div class="social-links">
+                <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <!-- Add more social links as needed -->
+            </div>
+            <p class="copyright">&copy; 2024 [Your Name] Yoga. All rights reserved.</p>
+        </div>
+    </section>
+
+    <!-- Optional: Smooth scrolling for anchor links -->
     <script>
-        // --- Portal Logic ---
-        function enterSanctuary() {
-            const name = document.getElementById('userNameInput').value;
-            if(!name) return alert("Please tell us your name.");
-            
-            document.getElementById('display-name').innerText = name;
-            document.getElementById('entry-portal').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('entry-portal').style.display = 'none';
-                document.getElementById('app').style.display = 'block';
-                setTimeout(() => document.getElementById('app').style.opacity = '1', 50);
-            }, 600);
-            initCalendar();
-        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
 
-        // --- View Controller ---
-        function showView(viewId, btn) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById('view-' + viewId).classList.add('active');
-            btn.classList.add('active');
-            
-            if(viewId === 'booking') initMats();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // --- Admin Unlock ---
-        function unlockAdmin() {
-            const code = prompt("Enter Staff Access Key:");
-            if(code === "admin123") {
-                document.getElementById('nav-admin').style.display = 'flex';
-                alert("Dashboard Access Granted.");
-            } else {
-                alert("Access Denied.");
-            }
-        }
-
-        // --- Studio Logic ---
-        function initCalendar() {
-            const cal = document.getElementById('calendar');
-            for(let i=1; i<=31; i++) {
-                const d = document.createElement('div');
-                d.className = `cal-date ${i === 18 ? 'active' : ''}`;
-                d.innerText = i;
-                cal.appendChild(d);
-            }
-        }
-
-        function initMats() {
-            const grid = document.getElementById('matGrid');
-            grid.innerHTML = '';
-            for(let i=1; i<=10; i++) {
-                const m = document.createElement('div');
-                m.className = 'cal-date';
-                m.style.border = '1px solid #F3E5F5';
-                m.innerText = i;
-                m.onclick = () => {
-                    document.querySelectorAll('#matGrid .cal-date').forEach(el => el.classList.remove('active'));
-                    m.classList.add('active');
-                    document.getElementById('bookBtn').style.display = 'inline-block';
-                };
-                grid.appendChild(m);
-            }
-        }
-
-        // --- Music Logic ---
-        function playTrack(name, time) {
-            const p = document.getElementById('player');
-            document.getElementById('p-name').innerText = name;
-            document.getElementById('p-time').innerText = time;
-            p.classList.add('visible');
-        }
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
+
 </body>
 </html>
