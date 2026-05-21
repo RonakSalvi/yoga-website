@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Yoga | Book Your Session</title>
+    <title>Aura Yoga | Multilingual Sanctuary</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
@@ -38,7 +38,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 10%;
+            padding: 15px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -49,16 +49,24 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             letter-spacing: 2px;
             color: var(--primary);
             text-decoration: none;
             font-weight: 700;
         }
 
-        nav ul { display: flex; list-style: none; }
-        nav ul li { margin-left: 30px; }
-        nav ul li a { text-decoration: none; color: var(--dark); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+
+        .lang-switcher select {
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            outline: none;
+        }
 
         /* --- Hero Section --- */
         .hero {
@@ -74,7 +82,7 @@
             color: var(--white);
         }
 
-        .hero-content h1 { font-size: 4.5rem; margin-bottom: 20px; }
+        .hero-content h1 { font-size: 4rem; margin-bottom: 20px; }
 
         .btn {
             padding: 15px 40px;
@@ -89,22 +97,14 @@
             font-size: 1rem;
         }
 
-        .btn:hover {
-            background: transparent;
-            color: white;
-            border: 1px solid white;
-            transform: translateY(-3px);
-        }
+        .btn:hover { background: transparent; color: white; border: 1px solid white; transform: translateY(-3px); }
 
         /* --- Modal / Form Styling --- */
         .modal {
             display: none;
             position: fixed;
             z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
             align-items: center;
@@ -113,31 +113,19 @@
 
         .modal-content {
             background: var(--white);
-            padding: 50px;
+            padding: 40px;
             border-radius: 30px;
             width: 90%;
-            max-width: 500px;
+            max-width: 450px;
             position: relative;
             box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-            animation: slideUp 0.5s ease;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; }
 
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .booking-form { display: flex; flex-direction: column; gap: 20px; }
-        .booking-form h2 { color: var(--primary); text-align: center; }
-        .booking-form label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: -15px; color: #888; }
+        .booking-form { display: flex; flex-direction: column; gap: 15px; }
+        .booking-form h2 { color: var(--primary); text-align: center; margin-bottom: 10px;}
+        .booking-form label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #888; margin-bottom: -10px;}
         
         .booking-form input, .booking-form select {
             padding: 12px;
@@ -154,57 +142,65 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .submit-btn:hover { background: var(--dark); }
-
         /* --- Classes Section --- */
-        .section { padding: 100px 10%; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 50px; }
-        .card { background: var(--white); padding: 40px; border-radius: 20px; transition: 0.4s; cursor: pointer; }
+        .section { padding: 80px 10%; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: var(--white); padding: 30px; border-radius: 20px; transition: 0.4s; cursor: pointer; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
         .card i { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
 
-        footer { background: var(--dark); color: var(--secondary); padding: 40px 10%; text-align: center; }
+        footer { background: var(--dark); color: var(--secondary); padding: 30px 10%; text-align: center; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-right ul { display: none; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="#" class="logo">AURA YOGA</a>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#classes">Classes</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <select id="langSelect" onchange="changeLanguage()">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="mr">मराठी (Marathi)</option>
+                    <option value="de">Deutsch (German)</option>
+                </select>
+            </div>
+        </div>
     </nav>
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Find Your Balance.</h1>
-            <p>Join our community and discover the peace within.</p>
-            <button class="btn" onclick="openModal()">Begin Your Practice</button>
+            <h1 id="hero-title">Find Your Balance.</h1>
+            <p id="hero-sub">Join our community and discover the peace within.</p>
+            <button class="btn" id="hero-btn" onclick="openModal()">Begin Your Practice</button>
         </div>
     </section>
 
     <section id="classes" class="section">
-        <h2 style="font-size: 2.5rem;">Our Mindful Sessions</h2>
+        <h2 id="class-title" style="font-size: 2.5rem;">Our Mindful Sessions</h2>
         <div class="grid">
             <div class="card" onclick="openModal()">
                 <i class="fa-solid fa-leaf"></i>
-                <h3>Hatha Flow</h3>
-                <p>Focus on alignment and breath.</p>
+                <h3 id="c1-t">Hatha Flow</h3>
+                <p id="c1-d">Focus on alignment and breath.</p>
             </div>
             <div class="card" onclick="openModal()">
                 <i class="fa-solid fa-wind"></i>
-                <h3>Vinyasa</h3>
-                <p>Dynamic, flowing practice.</p>
+                <h3 id="c2-t">Vinyasa</h3>
+                <p id="c2-d">Dynamic, flowing practice.</p>
             </div>
             <div class="card" onclick="openModal()">
                 <i class="fa-solid fa-moon"></i>
-                <h3>Yin Yoga</h3>
-                <p>Restorative poses for calm.</p>
+                <h3 id="c3-t">Yin Yoga</h3>
+                <p id="c3-d">Restorative poses for calm.</p>
             </div>
         </div>
     </section>
@@ -214,43 +210,125 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             
-            <!-- UPDATE THE ACTION URL BELOW WITH YOUR FORMSPREE ID -->
+            <!-- REPLACE 'YOUR_ID_HERE' WITH YOUR FORMSPREE ID -->
             <form class="booking-form" action="https://formspree.io/f/mwvzoeao" method="POST">
-                <h2>Book Your Batch</h2>
+                <h2 id="form-title">Book Your Batch</h2>
                 
-                <label>Full Name</label>
-                <input type="text" name="name" placeholder="Enter your name" required>
+                <label id="l-name">Full Name</label>
+                <input type="text" name="name" required>
 
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="Enter your email" required>
+                <label id="l-email">Email Address</label>
+                <input type="email" name="email" required>
 
-                <label>Select Date</label>
+                <label id="l-date">Select Date</label>
                 <input type="date" id="bookingDate" name="date" required>
 
-                <label>Choose Batch</label>
-                <select name="batch" required>
-                    <option value="" disabled selected>Select a time slot</option>
-                    <option value="Morning (6:00 AM)">Morning (6:00 AM - 7:30 AM)</option>
-                    <option value="Noon (12:00 PM)">Mid-Day (12:00 PM - 1:30 PM)</option>
-                    <option value="Evening (5:30 PM)">Evening (5:30 PM - 7:00 PM)</option>
+                <label id="l-batch">Choose Batch</label>
+                <select name="batch" id="batchSelect" required>
+                    <option value="" disabled selected id="opt-default">Select a time slot</option>
+                    <option value="Morning" id="opt-morn">Morning (6:00 AM)</option>
+                    <option value="Noon" id="opt-noon">Mid-Day (12:00 PM)</option>
+                    <option value="Evening" id="opt-even">Evening (5:30 PM)</option>
                 </select>
 
-                <button type="submit" class="submit-btn">Confirm Booking</button>
+                <button type="submit" class="submit-btn" id="form-btn">Confirm Booking</button>
             </form>
         </div>
     </div>
 
-    <footer id="contact">
-        <p>&copy; 2024 Aura Yoga Studio. Namaste.</p>
+    <footer>
+        <p id="footer-text">&copy; 2024 Aura Yoga Studio. Namaste.</p>
     </footer>
 
     <script>
+        const translations = {
+            en: {
+                heroTitle: "Find Your Balance.",
+                heroSub: "Join our community and discover the peace within.",
+                heroBtn: "Begin Your Practice",
+                classTitle: "Our Mindful Sessions",
+                c1T: "Hatha Flow", c1D: "Focus on alignment and breath.",
+                c2T: "Vinyasa", c2D: "Dynamic, flowing practice.",
+                c3T: "Yin Yoga", c3D: "Restorative poses for calm.",
+                formTitle: "Book Your Batch",
+                lName: "Full Name", lEmail: "Email Address", lDate: "Select Date", lBatch: "Choose Batch",
+                optDef: "Select a time slot", optMorn: "Morning (6:00 AM)", optNoon: "Mid-Day (12:00 PM)", optEven: "Evening (5:30 PM)",
+                formBtn: "Confirm Booking",
+                footer: "© 2024 Aura Yoga Studio. Namaste."
+            },
+            hi: {
+                heroTitle: "अपना संतुलन खोजें।",
+                heroSub: "हमारे समुदाय में शामिल हों और भीतर की शांति पाएं।",
+                heroBtn: "अपना अभ्यास शुरू करें",
+                classTitle: "हमारे सत्र",
+                c1T: "हठ योग", c1D: "संरेखण और सांस पर ध्यान दें।",
+                c2T: "विन्यास", c2D: "गतिशील, बहने वाला अभ्यास।",
+                c3T: "यिन योग", c3D: "शांति के लिए आरामदायक मुद्राएं।",
+                formTitle: "अपना बैच बुक करें",
+                lName: "पूरा नाम", lEmail: "ईमेल पता", lDate: "तारीख चुनें", lBatch: "बैच चुनें",
+                optDef: "समय चुनें", optMorn: "सुबह (6:00 AM)", optNoon: "दोपहर (12:00 PM)", optEven: "शाम (5:30 PM)",
+                formBtn: "बुकिंग की पुष्टि करें",
+                footer: "© 2024 औरा योग स्टूडियो। नमस्ते।"
+            },
+            mr: {
+                heroTitle: "स्वतःचे संतुलन शोधा.",
+                heroSub: "आमच्या समुदायात सामील व्हा आणि आंतरिक शांती मिळवा.",
+                heroBtn: "आपला सराव सुरू करा",
+                classTitle: "आमचे सत्र",
+                c1T: "हठ योग", c1D: "संरेखन आणि श्वासावर लक्ष केंद्रित करा.",
+                c2T: "विन्यास", c2D: "गतिमान आणि प्रवाही सराव.",
+                c3T: "यिन योग", c3D: "शांततेसाठी आरामदायी योगासने.",
+                formTitle: "तुमची बॅच बुक करा",
+                lName: "पूर्ण नाव", lEmail: "ईमेल पत्ता", lDate: "तारीख निवडा", lBatch: "बॅच निवडा",
+                optDef: "वेळ निवडा", optMorn: "सकाळ (6:00 AM)", optNoon: "दुपार (12:00 PM)", optEven: "संध्याकाळ (5:30 PM)",
+                formBtn: "बुकिंगची पुष्टी करा",
+                footer: "© 2024 ऑरा योग स्टुडिओ. नमस्ते."
+            },
+            de: {
+                heroTitle: "Finden Sie Ihr Gleichgewicht.",
+                heroSub: "Treten Sie unserer Community bei und finden Sie inneren Frieden.",
+                heroBtn: "Beginnen Sie Ihre Praxis",
+                classTitle: "Unsere Sitzungen",
+                c1T: "Hatha Flow", c1D: "Fokus auf Ausrichtung und Atem.",
+                c2T: "Vinyasa", c2D: "Dynamische, fließende Praxis.",
+                c3T: "Yin Yoga", c3D: "Erholsame Posen für mehr Ruhe.",
+                formTitle: "Kurs Buchen",
+                lName: "Vollständiger Name", lEmail: "E-Mail-Adresse", lDate: "Datum wählen", lBatch: "Zeitraum wählen",
+                optDef: "Zeitfenster wählen", optMorn: "Morgen (6:00 Uhr)", optNoon: "Mittag (12:00 Uhr)", optEven: "Abend (17:30 Uhr)",
+                formBtn: "Buchung bestätigen",
+                footer: "© 2024 Aura Yoga Studio. Namaste."
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById("langSelect").value;
+            const t = translations[lang];
+
+            document.getElementById("hero-title").innerText = t.heroTitle;
+            document.getElementById("hero-sub").innerText = t.heroSub;
+            document.getElementById("hero-btn").innerText = t.heroBtn;
+            document.getElementById("class-title").innerText = t.classTitle;
+            document.getElementById("c1-t").innerText = t.c1T; document.getElementById("c1-d").innerText = t.c1D;
+            document.getElementById("c2-t").innerText = t.c2T; document.getElementById("c2-d").innerText = t.c2D;
+            document.getElementById("c3-t").innerText = t.c3T; document.getElementById("c3-d").innerText = t.c3D;
+            document.getElementById("form-title").innerText = t.formTitle;
+            document.getElementById("l-name").innerText = t.lName;
+            document.getElementById("l-email").innerText = t.lEmail;
+            document.getElementById("l-date").innerText = t.lDate;
+            document.getElementById("l-batch").innerText = t.lBatch;
+            document.getElementById("opt-default").innerText = t.optDef;
+            document.getElementById("opt-morn").innerText = t.optMorn;
+            document.getElementById("opt-noon").innerText = t.optNoon;
+            document.getElementById("opt-even").innerText = t.optEven;
+            document.getElementById("form-btn").innerText = t.formBtn;
+            document.getElementById("footer-text").innerText = t.footer;
+        }
+
         function openModal() { document.getElementById("bookingModal").style.display = "flex"; }
         function closeModal() { document.getElementById("bookingModal").style.display = "none"; }
-        window.onclick = function(event) {
-            let modal = document.getElementById("bookingModal");
-            if (event.target == modal) closeModal();
-        }
+        window.onclick = function(event) { if (event.target == document.getElementById("bookingModal")) closeModal(); }
+        
+        // Set min date to today
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('bookingDate').setAttribute('min', today);
     </script>
