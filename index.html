@@ -3,130 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Wellness | Find Your Light</title>
+    <title>Aura Wellness | The All-in-One Sanctuary</title>
+    
+    <!-- Sophisticated Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
+    
     <style>
         :root {
-            --lavender-light: #F3E5F5;
-            --lavender-mid: #E1BEE7;
             --lavender-deep: #6750A4;
-            --text-main: #2D2438;
+            --lavender-mid: #9575CD;
+            --lavender-soft: #F3E5F5;
+            --lavender-mist: #FDFBFF;
             --glass: rgba(255, 255, 255, 0.7);
+            --text-main: #2D2438;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body { 
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(135deg, #FDFCFD 0%, #F3E5F5 100%);
+            background: var(--lavender-mist);
             color: var(--text-main);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
-        /* --- Elegant Navigation --- */
+        /* --- Background Elements --- */
+        .orb {
+            position: fixed; width: 400px; height: 400px;
+            background: radial-gradient(circle, var(--lavender-soft) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1; filter: blur(50px); animation: float 20s infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* --- Navigation --- */
         nav {
             position: fixed; top: 0; width: 100%; height: 80px;
             display: flex; align-items: center; padding: 0 5%;
-            background: var(--glass); backdrop-filter: blur(15px);
+            background: var(--glass); backdrop-filter: blur(20px);
             z-index: 1000; border-bottom: 1px solid rgba(103, 80, 164, 0.1);
         }
-        .nav-brand { font-family: 'Playfair Display'; font-size: 28px; color: var(--lavender-deep); flex-grow: 1; font-style: italic; }
-        .nav-links a { text-decoration: none; color: var(--text-main); margin-left: 30px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
-
-        /* --- Hero Section --- */
-        .hero { 
-            padding: 180px 5% 100px; text-align: center; 
-            background: url('https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=1600&q=80') center/cover;
-            background-attachment: fixed; color: white; position: relative;
+        .nav-brand { font-family: 'Playfair Display'; font-size: 28px; color: var(--lavender-deep); flex-grow: 1; font-style: italic; cursor: pointer; }
+        .nav-links button { 
+            background: none; border: none; color: var(--text-main); 
+            margin-left: 30px; font-size: 12px; letter-spacing: 2px; 
+            text-transform: uppercase; font-weight: 500; cursor: pointer;
+            transition: 0.3s;
         }
-        .hero::before { content: ''; position: absolute; inset: 0; background: rgba(45, 36, 56, 0.4); }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: clamp(48px, 8vw, 80px); margin-bottom: 20px; }
+        .nav-links button:hover { color: var(--lavender-deep); }
 
-        /* --- Fun Facts Section --- */
-        .section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
-        .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        /* --- View Management --- */
+        .view { display: none; padding: 120px 5% 60px; min-height: 100vh; animation: fadeIn 0.8s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Home View --- */
+        .hero { text-align: center; max-width: 900px; margin: 0 auto 80px; }
+        .hero h1 { font-size: clamp(40px, 8vw, 72px); line-height: 1.1; margin-bottom: 24px; }
+        .hero p { font-size: 18px; font-weight: 300; letter-spacing: 1px; color: #666; }
+
+        .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .fact-card { 
-            background: white; padding: 40px; border-radius: 40px 0 40px 0;
-            box-shadow: 0 20px 40px rgba(103, 80, 164, 0.05);
-            border: 1px solid var(--lavender-light);
+            background: white; padding: 40px; border-radius: 40px 4px;
+            box-shadow: 0 15px 35px rgba(103, 80, 164, 0.05);
+            border: 1px solid var(--lavender-soft); transition: var(--transition);
         }
+        .fact-card:hover { transform: translateY(-10px); border-color: var(--lavender-mid); }
         .fact-card span { color: var(--lavender-deep); font-size: 40px; margin-bottom: 20px; display: block; }
 
-        /* --- Chat Feature --- */
+        /* --- Booking View --- */
+        .studio-floor { 
+            background: white; padding: 60px 20px; border-radius: 40px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03); max-width: 700px; margin: 0 auto;
+            border: 1px solid var(--lavender-soft);
+        }
+        .instructor-stage { 
+            width: 120px; height: 4px; background: var(--lavender-deep); 
+            margin: 0 auto 60px; border-radius: 10px; position: relative;
+        }
+        .instructor-stage::after { content: 'INSTRUCTOR'; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 3px; color: var(--lavender-deep); font-weight: bold; }
+
+        .mats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 500px; margin: 0 auto; }
+        .mat { 
+            aspect-ratio: 1/1.8; border: 1px solid var(--lavender-soft); border-radius: 8px; 
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: var(--transition); background: #fff;
+        }
+        .mat.occupied { background: #f5f5f5; border: none; cursor: not-allowed; opacity: 0.3; }
+        .mat.selected { background: var(--lavender-deep); transform: scale(1.1); color: white; border: none; }
+
+        /* --- Zen Den View --- */
+        .auth-card { 
+            max-width: 400px; margin: 100px auto; padding: 50px; 
+            background: var(--glass); backdrop-filter: blur(20px);
+            border-radius: 40px; text-align: center; border: 1px solid white;
+        }
+        .track-list { max-width: 600px; margin: 40px auto; }
+        .track-card { 
+            background: white; padding: 20px; border-radius: 20px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 20px; cursor: pointer;
+            border: 1px solid var(--lavender-soft); transition: 0.3s;
+        }
+        .track-card:hover { background: var(--lavender-soft); }
+        .play-icon { background: var(--lavender-deep); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* --- Chat UI --- */
         .chat-fab {
             position: fixed; bottom: 30px; right: 30px;
             background: var(--lavender-deep); color: white;
             width: 60px; height: 60px; border-radius: 30px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 20px rgba(103, 80, 164, 0.3);
+            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.3);
             cursor: pointer; z-index: 1000;
         }
         .chat-window {
             position: fixed; bottom: 100px; right: 30px; width: 320px;
-            background: white; border-radius: 24px; display: none;
+            background: white; border-radius: 30px; display: none;
             flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            overflow: hidden; z-index: 1000; border: 1px solid var(--lavender-light);
+            overflow: hidden; z-index: 1000; border: 1px solid var(--lavender-soft);
+        }
+
+        /* --- Buttons & Inputs --- */
+        .btn-primary {
+            background: var(--lavender-deep); color: white; border: none;
+            padding: 16px 40px; border-radius: 100px; font-family: 'Playfair Display';
+            font-size: 16px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(103, 80, 164, 0.2); }
+        input { 
+            width: 100%; padding: 15px; border-radius: 15px; 
+            border: 1px solid var(--lavender-soft); margin-bottom: 20px; outline: none;
+            text-align: center; font-size: 18px;
         }
     </style>
 </head>
 <body>
+
+    <div class="orb"></div>
+
     <nav>
-        <div class="nav-brand">Aura</div>
+        <div class="nav-brand" onclick="showView('home')">Aura</div>
         <div class="nav-links">
-            <a href="index.html">Sanctuary</a>
-            <a href="booking.html">Book Mat</a>
-            <a href="zen-den.html">Zen Den</a>
+            <button onclick="showView('home')">Sanctuary</button>
+            <button onclick="showView('booking')">Book Mat</button>
+            <button onclick="showView('zen')">Zen Den</button>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Breathe in Lavender.</h1>
-            <p style="font-size: 18px; font-weight: 300; letter-spacing: 1px;">A digital sanctuary for your physical practice.</p>
-        </div>
-    </header>
+    <!-- VIEW: HOME -->
+    <main id="home" class="view active">
+        <section class="hero">
+            <h1>The Future of <br><i>Inner Peace.</i></h1>
+            <p>Welcome to Aura Wellness. We believe in the power of lavender, the strength of silence, and the beauty of a focused mind.</p>
+        </section>
 
-    <section class="section">
-        <h2 style="text-align:center; margin-bottom: 60px; font-size: 40px;">The Aura Philosophy</h2>
         <div class="fact-grid">
             <div class="fact-card">
-                <span class="material-symbols-outlined">self_improvement</span>
-                <h3>Silent Strength</h3>
-                <p>Did you know? Holding a pose in silence increases mental resilience more than high-intensity cardio.</p>
+                <span class="material-symbols-outlined">history_edu</span>
+                <h3>Ancient Roots</h3>
+                <p>Yoga originated over 5,000 years ago. We preserve that history while adding a modern, digital touch.</p>
             </div>
             <div class="fact-card">
-                <span class="material-symbols-outlined">eco</span>
-                <h3>Natural Rhythm</h3>
-                <p>Our studio follows the circadian rhythm. We use lavender scents in the evening to trigger natural melatonin.</p>
+                <span class="material-symbols-outlined">psychology_alt</span>
+                <h3>Mental Clarity</h3>
+                <p>Practicing in a lavender-themed environment is scientifically proven to lower heart rates by 10%.</p>
             </div>
             <div class="fact-card">
-                <span class="material-symbols-outlined">auto_awesome</span>
-                <h3>The 1% Rule</h3>
-                <p>Yoga isn't about the 60 minutes on the mat; it's about the 1% of extra calm you carry into the rest of your day.</p>
+                <span class="material-symbols-outlined">bedtime</span>
+                <h3>Restorative Flow</h3>
+                <p>Our "Sunset Sessions" are designed to prepare your body for the deepest sleep of your life.</p>
             </div>
         </div>
-    </section>
+    </main>
 
-    <div class="chat-fab" onclick="toggleChat()"><span class="material-symbols-outlined">spa</span></div>
+    <!-- VIEW: BOOKING -->
+    <main id="booking" class="view">
+        <div style="text-align:center; margin-bottom: 50px;">
+            <h2 style="font-size: 42px;">Reserve Your Space</h2>
+            <p style="color: #888;">Visualise the studio and select your mat.</p>
+        </div>
+        
+        <div class="studio-floor">
+            <div class="instructor-stage"></div>
+            <div class="mats-grid" id="matsContainer"></div>
+        </div>
+
+        <div id="bookingAction" style="text-align:center; margin-top: 40px; display:none;">
+            <p id="matSelectionText" style="margin-bottom: 20px; font-style: italic;"></p>
+            <button class="btn-primary" onclick="confirmBooking()">Confirm My Spot</button>
+        </div>
+    </main>
+
+    <!-- VIEW: ZEN DEN -->
+    <main id="zen" class="view">
+        <div id="zenGate">
+            <div class="auth-card">
+                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--lavender-deep)">lock_open</span>
+                <h2 style="margin: 20px 0;">Member Access</h2>
+                <input type="password" id="passcode" placeholder="Enter Code">
+                <button class="btn-primary" style="width: 100%;" onclick="unlockZen()">Unlock Library</button>
+                <p style="font-size: 11px; color: #aaa; margin-top: 20px;">HINT: yoga2024</p>
+            </div>
+        </div>
+
+        <div id="zenContent" style="display:none;">
+            <div style="text-align:center;">
+                <h2 style="font-size: 42px;">Sonic Sanctuary</h2>
+                <p>Exclusive frequencies for Aura members.</p>
+            </div>
+            
+            <div class="track-list">
+                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 'Morning Lavender')">
+                    <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+                    <div><p style="font-weight:500">Morning Lavender</p><small>Ambient Flow • 15:00</small></div>
+                </div>
+                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', 'Deep Violet Meditation')">
+                    <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+                    <div><p style="font-weight:500">Deep Violet Meditation</p><small>Tibetan Bowls • 20:00</small></div>
+                </div>
+            </div>
+
+            <div id="playerBar" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:white; padding:15px 30px; border-radius:100px; box-shadow:0 10px 40px rgba(0,0,0,0.1); display:none; align-items:center; gap:20px; border:1px solid var(--lavender-soft); z-index:1001;">
+                <span id="nowPlaying" style="font-size:14px; font-weight:500; color:var(--lavender-deep)"></span>
+                <audio id="audioElement" controls style="height:30px;"></audio>
+            </div>
+        </div>
+    </main>
+
+    <!-- CHAT FEATURE -->
+    <div class="chat-fab" onclick="toggleChat()"><span class="material-symbols-outlined">auto_awesome</span></div>
     <div class="chat-window" id="chatWindow">
         <div style="background: var(--lavender-deep); color: white; padding: 25px;">
-            <p style="font-family: 'Playfair Display'; font-size: 20px;">Aura Assistant</p>
-            <p style="font-size: 12px; opacity: 0.8;">How can I guide your practice today?</p>
+            <p style="font-family: 'Playfair Display'; font-size: 20px; font-style: italic;">Aura Assistant</p>
+            <p style="font-size: 11px; opacity: 0.7; letter-spacing: 1px;">ONLINE • READY TO GUIDE</p>
         </div>
-        <div style="padding: 20px; height: 250px; background: #FAF9FB;">
-            <div style="background: white; padding: 12px; border-radius: 15px; font-size: 14px; border: 1px solid var(--lavender-light);">
-                Namaste! I can help you book a mat or find a playlist in the Zen Den.
+        <div id="chatBody" style="padding: 20px; height: 250px; background: #FAF9FB; overflow-y: auto; font-size: 14px;">
+            <div style="background: white; padding: 12px; border-radius: 15px; border: 1px solid var(--lavender-soft); margin-bottom: 10px;">
+                Namaste. I am here to help you find your flow. Would you like to book a mat or listen to music?
             </div>
+        </div>
+        <div style="padding: 15px; border-top: 1px solid var(--lavender-soft);">
+            <input type="text" placeholder="Ask anything..." style="margin:0; font-size: 14px; padding: 10px; border-radius: 10px;">
         </div>
     </div>
 
     <script>
+        // --- View Switcher ---
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0, 0);
+            if(viewId === 'booking') initBooking();
+        }
+
+        // --- Booking Logic ---
+        let selectedMat = null;
+        function initBooking() {
+            const container = document.getElementById('matsContainer');
+            container.innerHTML = '';
+            for (let i = 1; i <= 15; i++) {
+                const isTaken = Math.random() < 0.3;
+                const mat = document.createElement('div');
+                mat.className = `mat ${isTaken ? 'occupied' : ''}`;
+                mat.innerHTML = `<span class="material-symbols-outlined" style="font-size:18px">${isTaken ? 'person' : 'spa'}</span>`;
+                if (!isTaken) {
+                    mat.onclick = () => {
+                        document.querySelectorAll('.mat').forEach(m => m.classList.remove('selected'));
+                        mat.classList.add('selected');
+                        selectedMat = i;
+                        document.getElementById('bookingAction').style.display = 'block';
+                        document.getElementById('matSelectionText').innerText = `You have selected Mat #${i}`;
+                    };
+                }
+                container.appendChild(mat);
+            }
+        }
+        function confirmBooking() {
+            alert(`Mat #${selectedMat} is now yours. We have sent a confirmation to your email.`);
+            showView('home');
+        }
+
+        // --- Zen Den Logic ---
+        function unlockZen() {
+            const pass = document.getElementById('passcode').value;
+            if (pass === 'yoga2024') {
+                document.getElementById('zenGate').style.display = 'none';
+                document.getElementById('zenContent').style.display = 'block';
+            } else {
+                alert('The sanctuary remains locked. Please check your code.');
+            }
+        }
+        function playTrack(url, name) {
+            const audio = document.getElementById('audioElement');
+            const bar = document.getElementById('playerBar');
+            document.getElementById('nowPlaying').innerText = name;
+            bar.style.display = 'flex';
+            audio.src = url;
+            audio.play();
+        }
+
+        // --- Chat Logic ---
         function toggleChat() {
-            const chat = document.getElementById('chatWindow');
-            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+            const win = document.getElementById('chatWindow');
+            win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
 </body>
