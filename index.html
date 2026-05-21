@@ -28,7 +28,7 @@
         }
         .lang-box { background: var(--white); padding: 50px; border-radius: 40px; text-align: center; box-shadow: 0 20px 60px rgba(150, 123, 182, 0.15); }
         .lang-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
-        .lang-btn { padding: 12px 25px; border: 2px solid var(--primary); border-radius: 50px; background: transparent; cursor: pointer; color: var(--primary); font-weight: 600; }
+        .lang-btn { padding: 12px 25px; border: 2px solid var(--primary); border-radius: 50px; background: transparent; cursor: pointer; color: var(--primary); font-weight: 600; transition: 0.3s; }
         .lang-btn:hover { background: var(--primary); color: white; }
 
         #mainContent { opacity: 0; transition: 1s ease; }
@@ -55,9 +55,9 @@
         .section { padding: 80px 10%; text-align: center; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
         .card { background: var(--white); padding: 40px; border-radius: 30px; border: 1px solid var(--secondary); cursor: pointer; transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(150, 123, 182, 0.1); }
 
-        /* --- Weather & Map Section --- */
+        /* --- Location Section --- */
         .location-container {
             display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; margin-top: 40px; text-align: left;
         }
@@ -65,22 +65,24 @@
             background: var(--white); padding: 30px; border-radius: 30px; border: 1px solid var(--secondary);
             display: flex; flex-direction: column; justify-content: center;
         }
-        .map-card { border-radius: 30px; overflow: hidden; border: 1px solid var(--secondary); height: 400px; }
+        .map-card { border-radius: 30px; overflow: hidden; border: 1px solid var(--secondary); height: 400px; background: #eee; }
 
         /* --- Booking Modal --- */
         .modal {
             display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(45, 36, 56, 0.7); backdrop-filter: blur(10px); align-items: center; justify-content: center;
         }
-        .modal-content { background: var(--white); padding: 40px; border-radius: 35px; width: 95%; max-width: 500px; position: relative; }
+        .modal-content { background: var(--white); padding: 40px; border-radius: 35px; width: 95%; max-width: 500px; position: relative; max-height: 90vh; overflow-y: auto; }
         .mat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
-        .mat { aspect-ratio: 1/1.3; background: var(--secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .mat { aspect-ratio: 1/1.3; background: var(--secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; color: var(--primary-dark); transition: 0.2s; }
         .mat.taken { background: #eee; color: #ccc; cursor: not-allowed; }
-        .mat:hover:not(.taken) { background: var(--primary); color: white; }
+        .mat:hover:not(.taken) { background: var(--primary); color: white; transform: scale(1.05); }
 
         .booking-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .booking-form input, .booking-form select { padding: 12px; border: 1px solid var(--secondary); border-radius: 10px; background: var(--bg-light); }
-        .submit-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+        .booking-form input, .booking-form select { padding: 12px; border: 1px solid var(--secondary); border-radius: 10px; background: var(--bg-light); outline: none; }
+        .booking-form input:focus { border-color: var(--primary); }
+        .submit-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .submit-btn:hover { background: var(--primary-dark); }
 
         footer { text-align: center; padding: 40px; background: var(--dark); color: var(--secondary); }
 
@@ -111,7 +113,7 @@
     <div id="mainContent">
         <nav>
             <a href="#" class="logo">AURA YOGA</a>
-            <div id="currentLangTag" style="font-size: 0.7rem; color: var(--primary-dark); font-weight: 600;"></div>
+            <div id="currentLangTag" style="font-size: 0.7rem; color: var(--primary-dark); font-weight: 600; text-transform: uppercase;"></div>
         </nav>
 
         <section class="hero">
@@ -126,12 +128,12 @@
             <h2 id="class-heading">Our Sessions</h2>
             <div class="grid">
                 <div class="card" onclick="openBooking('Hatha Flow')">
-                    <i class="fa-solid fa-spa"></i>
+                    <i class="fa-solid fa-spa" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
                     <h3 id="c1-t">Hatha Flow</h3>
                     <p id="c1-d">Gentle movement and breath.</p>
                 </div>
                 <div class="card" onclick="openBooking('Vinyasa')">
-                    <i class="fa-solid fa-bolt-lightning"></i>
+                    <i class="fa-solid fa-bolt-lightning" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
                     <h3 id="c2-t">Vinyasa</h3>
                     <p id="c2-d">Energetic flow and strength.</p>
                 </div>
@@ -150,35 +152,46 @@
                     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                     </script>
                 </div>
-                <!-- Google Map -->
+                <!-- Google Map (FIXED) -->
                 <div class="map-card">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db34c1ad8fd3%3A0x79d5c11c7791cfe4!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db34c1ad8fd3%3A0x79d5c11c7791cfe4!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sde!4v1715852543210!5m2!1sen!2sde" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </section>
 
-        <!-- MODAL -->
+        <!-- BOOKING MODAL -->
         <div id="bookingModal" class="modal">
             <div class="modal-content">
-                <span style="position:absolute; top:20px; right:25px; cursor:pointer;" onclick="closeModal()">&times;</span>
+                <span style="position:absolute; top:20px; right:25px; cursor:pointer; font-size: 1.5rem; color: var(--primary);" onclick="closeModal()">&times;</span>
                 <div id="step1">
                     <h2 id="map-title" style="text-align:center;">Select Your Mat</h2>
+                    <div style="width: 80px; height: 5px; background: var(--primary); margin: 15px auto; border-radius: 5px;"></div>
                     <div class="mat-grid" id="matGrid"></div>
                 </div>
                 <div id="step2" style="display:none;">
                     <h2 id="form-title">Registration</h2>
-                    <p id="selection-summary" style="color:var(--primary); margin-bottom:15px;"></p>
+                    <p id="selection-summary" style="color:var(--primary-dark); font-weight: 600; margin-bottom:15px;"></p>
                     <form class="booking-form" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
                         <input type="hidden" name="mat" id="hiddenMat">
                         <input type="hidden" name="class" id="hiddenClass">
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="email" name="email" placeholder="Email" required>
+                        
+                        <input type="text" name="name" placeholder="Full Name" required>
+                        <input type="email" name="email" placeholder="Email Address" required>
                         <input type="date" id="bookingDate" name="date" required>
+                        
                         <select name="batch" required>
                             <option value="Morning">Morning (6:30 AM)</option>
                             <option value="Evening">Evening (6:30 PM)</option>
                         </select>
-                        <button type="submit" class="submit-btn" id="form-btn">Book Now</button>
+                        <button type="submit" class="submit-btn" id="form-btn">Confirm Booking</button>
                     </form>
                 </div>
             </div>
@@ -195,25 +208,25 @@
                 heroTitle: "Serenity in Stuttgart.", heroSub: "Your journey to mindfulness begins here.",
                 classHeading: "Our Sessions", c1T: "Hatha Flow", c1D: "Gentle movement.",
                 c2T: "Vinyasa", c2D: "Energetic flow.", locTitle: "Find Us in Stuttgart",
-                weatherLabel: "Current Weather", mapTitle: "Select Your Mat", formTitle: "Registration", formBtn: "Book Now"
+                weatherLabel: "Current Weather", mapTitle: "Select Your Mat", formTitle: "Registration", formBtn: "Confirm Booking"
             },
             hi: {
                 heroTitle: "स्टटगार्ट में शांति।", heroSub: "आपकी जागरूकता की यात्रा यहाँ शुरू होती है।",
                 classHeading: "हमारे सत्र", c1T: "हठ योग", c1D: "कोमल गतिविधि।",
                 c2T: "विन्यास", c2D: "ऊर्जावान प्रवाह।", locTitle: "हमें स्टटगार्ट में खोजें",
-                weatherLabel: "वर्तमान मौसम", mapTitle: "अपनी मैट चुनें", formTitle: "पंजीकरण", formBtn: "अभी बुक करें"
+                weatherLabel: "वर्तमान मौसम", mapTitle: "अपनी मैट चुनें", formTitle: "पंजीकरण", formBtn: "बुकिंग की पुष्टि करें"
             },
             mr: {
                 heroTitle: "स्टटगार्टमध्ये शांतता.", heroSub: "तुमचा सजगतेचा प्रवास येथे सुरू होतो.",
                 classHeading: "आमचे सत्र", c1T: "हठ योग", c1D: "सौम्य हालचाल.",
                 c2T: "विन्यास", c2D: "ऊर्जावान प्रवाह.", locTitle: "आम्हाला स्टटगार्टमध्ये शोधा",
-                weatherLabel: "सध्याचे हवामान", mapTitle: "तुमची मॅट निवडा", formTitle: "नोंदणी", formBtn: "आता बुक करा"
+                weatherLabel: "सध्याचे हवामान", mapTitle: "तुमची मॅट निवडा", formTitle: "नोंदणी", formBtn: "बुकिंगची पुष्टी करा"
             },
             de: {
                 heroTitle: "Gelassenheit in Stuttgart.", heroSub: "Deine Reise zur Achtsamkeit beginnt hier.",
                 classHeading: "Unsere Kurse", c1T: "Hatha Flow", c1D: "Sanfte Bewegung.",
                 c2T: "Vinyasa", c2D: "Energetischer Flow.", locTitle: "Finden Sie uns in Stuttgart",
-                weatherLabel: "Aktuelles Wetter", mapTitle: "Wähle deine Matte", formTitle: "Registrierung", formBtn: "Jetzt buchen"
+                weatherLabel: "Aktuelles Wetter", mapTitle: "Wähle deine Matte", formTitle: "Registrierung", formBtn: "Buchung bestätigen"
             }
         };
 
@@ -229,19 +242,19 @@
             document.getElementById('map-title').innerText = t.mapTitle;
             document.getElementById('form-title').innerText = t.formTitle;
             document.getElementById('form-btn').innerText = t.formBtn;
-            document.getElementById('currentLangTag').innerText = "Lang: " + lang;
+            document.getElementById('currentLangTag').innerText = lang;
 
             document.getElementById('langOverlay').style.display = 'none';
             document.getElementById('mainContent').style.opacity = '1';
         }
 
-        // Mat Logic
+        // Generate 12 Mats
         const grid = document.getElementById('matGrid');
         for (let i = 1; i <= 12; i++) {
             const mat = document.createElement('div');
             mat.className = 'mat';
             mat.innerText = i;
-            if ([3, 8].includes(i)) mat.className = 'mat taken';
+            if ([2, 7, 10].includes(i)) mat.className = 'mat taken';
             else mat.onclick = () => selectMat(i);
             grid.appendChild(mat);
         }
@@ -263,6 +276,8 @@
         }
 
         function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+        
+        // Set min date to today
         document.getElementById('bookingDate').setAttribute('min', new Date().toISOString().split('T')[0]);
     </script>
 </body>
