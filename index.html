@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Wellness | The Infinite Sanctuary</title>
+    <title>Aura | Personalized Sanctuary</title>
     
-    <!-- Premium Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
     
     <style>
@@ -15,329 +14,270 @@
             --lavender-mid: #9575CD;
             --lavender-soft: #F3E5F5;
             --lavender-mist: #FDFBFF;
-            --glass: rgba(255, 255, 255, 0.8);
+            --glass: rgba(255, 255, 255, 0.9);
             --text-main: #2D2438;
-            --radius: 40px;
+            --radius-lg: 32px;
             --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--lavender-mist);
-            color: var(--text-main);
-            overflow-x: hidden;
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', sans-serif; background: var(--lavender-mist); color: var(--text-main); overflow-x: hidden; }
+
+        /* --- Entry Portal --- */
+        #entry-portal {
+            position: fixed; inset: 0; background: var(--lavender-soft);
+            display: flex; align-items: center; justify-content: center; z-index: 5000;
+            transition: var(--transition);
         }
+        .portal-card { text-align: center; max-width: 400px; padding: 40px; }
+        .portal-card h1 { font-size: 42px; margin-bottom: 20px; color: var(--lavender-deep); }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-
-        /* --- Animated Background --- */
+        /* --- Main Layout --- */
+        .app-container { display: none; opacity: 0; transition: 1s; padding-bottom: 120px; }
         .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(243, 229, 245, 0.4) 0%, transparent 50%),
-                        radial-gradient(circle at 90% 80%, rgba(225, 190, 231, 0.3) 0%, transparent 50%);
+            background: radial-gradient(circle at 10% 10%, rgba(243, 229, 245, 0.8) 0%, transparent 50%);
             z-index: -1;
         }
 
-        /* --- Navigation --- */
-        nav {
-            position: fixed; top: 0; width: 100%; height: 90px;
-            display: flex; align-items: center; padding: 0 5%;
+        /* --- Header & Nav --- */
+        header { padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display'; font-size: 28px; font-style: italic; color: var(--lavender-deep); }
+
+        .view { display: none; padding: 0 5%; animation: fadeIn 0.8s ease forwards; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Dashboard Perspective --- */
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 24px; border: 1px solid var(--lavender-soft); }
+        .stat-card h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; margin-bottom: 10px; }
+        .stat-card p { font-size: 24px; font-weight: 600; color: var(--lavender-deep); }
+
+        /* --- Calendar UI --- */
+        .calendar-box { background: white; padding: 25px; border-radius: var(--radius-lg); margin: 30px 0; box-shadow: 0 10px 30px rgba(103, 80, 164, 0.05); }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 15px; text-align: center; }
+        .cal-head { font-size: 10px; font-weight: 700; opacity: 0.4; padding-bottom: 10px; }
+        .cal-date { padding: 10px 0; font-size: 13px; border-radius: 50%; cursor: pointer; }
+        .cal-date.active { background: var(--lavender-deep); color: white; }
+
+        /* --- Bottom Nav --- */
+        .bottom-nav {
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 500px; height: 75px;
             background: var(--glass); backdrop-filter: blur(20px);
-            z-index: 1000; border-bottom: 1px solid rgba(103, 80, 164, 0.1);
+            border-radius: 100px; display: flex; justify-content: space-around;
+            align-items: center; z-index: 4000; box-shadow: 0 20px 40px rgba(103, 80, 164, 0.15);
+            border: 1px solid white;
         }
-        .nav-brand { font-family: 'Playfair Display'; font-size: 32px; color: var(--lavender-deep); flex-grow: 1; font-style: italic; cursor: pointer; }
-        .nav-links button { 
-            background: none; border: none; color: var(--text-main); 
-            margin-left: 30px; font-size: 11px; letter-spacing: 2px; 
-            text-transform: uppercase; font-weight: 600; cursor: pointer;
-            transition: 0.3s; opacity: 0.7;
-        }
-        .nav-links button:hover { opacity: 1; color: var(--lavender-deep); }
+        .nav-item { background: none; border: none; display: flex; flex-direction: column; align-items: center; opacity: 0.4; cursor: pointer; transition: 0.3s; }
+        .nav-item.active { opacity: 1; color: var(--lavender-deep); }
+        .nav-item span { font-size: 24px; }
+        .nav-item small { font-size: 9px; font-weight: 700; margin-top: 4px; text-transform: uppercase; }
 
-        /* --- View Management --- */
-        .view { display: none; padding: 140px 5% 120px; min-height: 100vh; }
-        .view.active { display: block; animation: slideUp 1s ease forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- Floating Player --- */
+        .aura-player {
+            position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(200px);
+            width: 85%; max-width: 400px; background: white; padding: 15px 25px;
+            border-radius: 100px; display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 3000; transition: var(--transition);
+        }
+        .aura-player.visible { transform: translateX(-50%) translateY(0); }
 
-        /* --- Home View --- */
-        .hero { text-align: center; max-width: 900px; margin: 0 auto 100px; }
-        .hero h1 { font-size: clamp(40px, 7vw, 85px); line-height: 1; margin-bottom: 30px; font-weight: 400; }
-        .hero h1 i { font-weight: 400; }
-        
-        .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .fact-card { 
-            background: white; padding: 50px; border-radius: var(--radius);
-            box-shadow: 0 20px 40px rgba(103, 80, 164, 0.04);
-            border: 1px solid white; transition: var(--transition);
-        }
-        .fact-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(103, 80, 164, 0.08); }
-        .fact-card span { color: var(--lavender-deep); font-size: 48px; margin-bottom: 25px; display: block; }
-
-        /* --- Booking View --- */
-        .studio-floor { 
-            background: white; padding: 80px 40px; border-radius: var(--radius); 
-            box-shadow: 0 40px 100px rgba(0,0,0,0.03); max-width: 800px; margin: 0 auto;
-            border: 1px solid white; text-align: center;
-        }
-        .instructor-stage { 
-            width: 140px; height: 2px; background: var(--lavender-deep); 
-            margin: 0 auto 80px; position: relative;
-        }
-        .instructor-stage::after { content: 'INSTRUCTOR'; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 4px; color: var(--lavender-deep); opacity: 0.6; }
-
-        .mats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 550px; margin: 0 auto; }
-        .mat { 
-            aspect-ratio: 1/1.8; border: 1px solid var(--lavender-soft); border-radius: 12px; 
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: var(--transition); background: #fff;
-        }
-        .mat.occupied { background: #f8f8f8; border: none; cursor: not-allowed; opacity: 0.3; }
-        .mat.selected { background: var(--lavender-deep); transform: scale(1.1); color: white; border: none; box-shadow: 0 10px 20px rgba(103, 80, 164, 0.3); }
-
-        /* --- Zen Den View --- */
-        .auth-card { 
-            max-width: 450px; margin: 60px auto; padding: 60px; 
-            background: white; border-radius: var(--radius); 
-            text-align: center; border: 1px solid white; box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-        }
-        .track-card { 
-            background: white; padding: 25px; border-radius: 25px; margin-bottom: 15px;
-            display: flex; align-items: center; gap: 25px; cursor: pointer;
-            border: 1px solid white; transition: 0.3s;
-        }
-        .track-card:hover { background: var(--lavender-soft); transform: translateX(10px); }
-        .play-icon { background: var(--lavender-deep); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-
-        /* --- GLOBAL FLOATING PLAYER --- */
-        .zen-controller {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(150%);
-            width: 90%; max-width: 500px; background: var(--glass); 
-            backdrop-filter: blur(25px); padding: 15px 30px; border-radius: 100px;
-            display: flex; align-items: center; gap: 20px;
-            box-shadow: 0 20px 50px rgba(103, 80, 164, 0.2);
-            border: 1px solid white; z-index: 2000; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .zen-controller.visible { transform: translateX(-50%) translateY(0); }
-        .track-info { flex-grow: 1; }
-        .track-info p { font-size: 14px; font-weight: 600; color: var(--lavender-deep); }
-        .track-info small { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; }
-
-        /* --- Chat UI --- */
-        .chat-fab {
-            position: fixed; bottom: 30px; right: 30px;
-            background: var(--lavender-deep); color: white;
-            width: 65px; height: 65px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 15px 35px rgba(103, 80, 164, 0.3);
-            cursor: pointer; z-index: 1000; transition: 0.3s;
-        }
-        .chat-fab:hover { transform: rotate(15deg) scale(1.1); }
-
-        /* --- UI Elements --- */
-        .btn-aura {
-            background: var(--lavender-deep); color: white; border: none;
-            padding: 18px 45px; border-radius: 100px; font-family: 'Playfair Display';
-            font-size: 18px; cursor: pointer; transition: 0.3s;
-        }
-        .btn-aura:hover { letter-spacing: 1px; box-shadow: 0 15px 30px rgba(103, 80, 164, 0.2); }
-        
-        input { 
-            width: 100%; padding: 20px; border-radius: 20px; 
-            border: 1px solid var(--lavender-soft); margin-bottom: 25px; outline: none;
-            text-align: center; font-size: 20px; font-family: 'Inter';
-        }
+        /* --- Inputs & Buttons --- */
+        input { width: 100%; padding: 18px; border-radius: 15px; border: 1px solid var(--lavender-soft); margin-bottom: 20px; outline: none; text-align: center; font-size: 18px; }
+        .btn-aura { background: var(--lavender-deep); color: white; border: none; padding: 16px 40px; border-radius: 100px; font-family: 'Playfair Display'; font-size: 18px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="bg-glow"></div>
 
-    <nav>
-        <div class="nav-brand" onclick="showView('home')">Aura</div>
-        <div class="nav-links">
-            <button onclick="showView('home')">Sanctuary</button>
-            <button onclick="showView('booking')">Book Mat</button>
-            <button onclick="showView('zen')">Zen Den</button>
+    <!-- PORTAL: ASK FOR NAME -->
+    <div id="entry-portal">
+        <div class="portal-card">
+            <h1>Namaste.</h1>
+            <p style="margin-bottom: 30px; opacity: 0.7;">Welcome to your digital sanctuary. <br>What is your name?</p>
+            <input type="text" id="userNameInput" placeholder="Enter your name">
+            <button class="btn-aura" onclick="enterSanctuary()">Enter Aura</button>
         </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="app-container" id="app">
+        <header>
+            <div class="logo">Aura</div>
+            <div id="admin-trigger" onclick="unlockAdmin()" style="opacity: 0.2; cursor: pointer;">
+                <span class="material-symbols-outlined">shield_person</span>
+            </div>
+        </header>
+
+        <!-- VIEW: SANCTUARY -->
+        <main id="view-sanctuary" class="view active">
+            <h2 style="font-size: 36px; margin-bottom: 10px;">Hello, <span id="display-name">Seeker</span>.</h2>
+            <p style="opacity: 0.6; margin-bottom: 40px;">Your energy is welcome here today.</p>
+            
+            <div class="calendar-box">
+                <h4 style="font-family: 'Inter'; font-size: 14px;">May 2024</h4>
+                <div class="cal-grid" id="calendar">
+                    <div class="cal-head">M</div><div class="cal-head">T</div><div class="cal-head">W</div><div class="cal-head">T</div><div class="cal-head">F</div><div class="cal-head">S</div><div class="cal-head">S</div>
+                    <!-- Dates injected by JS -->
+                </div>
+            </div>
+
+            <h3>Today's Flows</h3>
+            <div style="background:white; padding:20px; border-radius:20px; margin-top:15px; display:flex; align-items:center; gap:15px;">
+                <div style="background:var(--lavender-soft); width:50px; height:50px; border-radius:15px; display:flex; align-items:center; justify-content:center; color:var(--lavender-deep); font-weight:bold;">18:00</div>
+                <div>
+                    <p style="font-weight:600;">Sunset Vinyasa</p>
+                    <small style="opacity:0.5;">60 mins • Master Flow</small>
+                </div>
+            </div>
+        </main>
+
+        <!-- VIEW: BOOKING -->
+        <main id="view-booking" class="view">
+            <h2 style="text-align:center; margin-bottom: 30px;">Reserve a Mat</h2>
+            <div style="background:white; padding:40px 20px; border-radius:32px; text-align:center;">
+                <div style="width:80px; height:2px; background:var(--lavender-deep); margin:0 auto 40px; opacity:0.3;"></div>
+                <div class="cal-grid" style="grid-template-columns: repeat(5, 1fr); max-width:300px; margin:0 auto;" id="matGrid"></div>
+                <button id="bookBtn" class="btn-aura" style="margin-top:40px; display:none;" onclick="alert('Confirmed!')">Confirm Spot</button>
+            </div>
+        </main>
+
+        <!-- VIEW: ZEN DEN -->
+        <main id="view-zen" class="view">
+            <h2 style="margin-bottom: 30px;">Zen Library</h2>
+            <div style="background:white; padding:20px; border-radius:20px; margin-bottom:15px; display:flex; align-items:center; gap:20px; cursor:pointer;" onclick="playTrack('Morning Lavender', '12:00')">
+                <span class="material-symbols-outlined" style="color:var(--lavender-deep); font-size:40px;">play_circle</span>
+                <div><p style="font-weight:600;">Morning Lavender</p><small>Ambient • 432Hz</small></div>
+            </div>
+            <div style="background:white; padding:20px; border-radius:20px; margin-bottom:15px; display:flex; align-items:center; gap:20px; cursor:pointer;" onclick="playTrack('Deep Violet Sleep', '30:00')">
+                <span class="material-symbols-outlined" style="color:var(--lavender-deep); font-size:40px;">play_circle</span>
+                <div><p style="font-weight:600;">Deep Violet Sleep</p><small>Binaural Beats</small></div>
+            </div>
+        </main>
+
+        <!-- VIEW: ADMIN DASHBOARD (HIDDEN) -->
+        <main id="view-admin" class="view">
+            <h2 style="color:var(--lavender-deep);">Studio Dashboard</h2>
+            <p style="opacity:0.6; margin-bottom:30px;">Internal Management Perspective</p>
+            
+            <div class="stat-grid">
+                <div class="stat-card"><h4>Active Students</h4><p>128</p></div>
+                <div class="stat-card"><h4>Mat Occupancy</h4><p>84%</p></div>
+                <div class="stat-card"><h4>Zen Den Plays</h4><p>1.2k</p></div>
+                <div class="stat-card"><h4>Revenue (MTD)</h4><p>$4.2k</p></div>
+            </div>
+
+            <h3 style="margin: 30px 0 15px;">Recent Bookings</h3>
+            <div id="admin-logs" style="background:white; border-radius:20px; padding:10px;">
+                <div style="padding:15px; border-bottom:1px solid #f5f5f5; font-size:13px;"><b>Sarah J.</b> reserved Mat #4 <small style="float:right; opacity:0.5;">2m ago</small></div>
+                <div style="padding:15px; border-bottom:1px solid #f5f5f5; font-size:13px;"><b>Mike R.</b> joined Zen Den <small style="float:right; opacity:0.5;">15m ago</small></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FLOATING PLAYER -->
+    <div id="player" class="aura-player">
+        <span class="material-symbols-outlined" style="color:var(--lavender-deep)">graphic_eq</span>
+        <div style="flex-grow:1;">
+            <p id="p-name" style="font-size:13px; font-weight:600;">Track Name</p>
+            <small id="p-time" style="font-size:10px; opacity:0.5;">00:00</small>
+        </div>
+        <button onclick="document.getElementById('player').classList.remove('visible')" style="background:none; border:none; cursor:pointer;"><span class="material-symbols-outlined">close</span></button>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav" id="mainNav">
+        <button class="nav-item active" onclick="showView('sanctuary', this)">
+            <span class="material-symbols-outlined">spa</span><small>Sanctuary</small>
+        </button>
+        <button class="nav-item" onclick="showView('booking', this)">
+            <span class="material-symbols-outlined">calendar_month</span><small>Book</small>
+        </button>
+        <button class="nav-item" onclick="showView('zen', this)">
+            <span class="material-symbols-outlined">library_music</span><small>Zen Den</small>
+        </button>
+        <!-- Dashboard Button (Hidden by default) -->
+        <button id="nav-admin" class="nav-item" style="display:none;" onclick="showView('admin', this)">
+            <span class="material-symbols-outlined">dashboard</span><small>Admin</small>
+        </button>
     </nav>
 
-    <!-- VIEW: HOME -->
-    <main id="home" class="view active">
-        <section class="hero">
-            <h1>Find your flow <br>in <i>Lavender.</i></h1>
-            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8; opacity: 0.7;">
-                Aura is more than a studio. It is a digital and physical sanctuary designed to help you reconnect with your breath and your light.
-            </p>
-            <button class="btn-aura" style="margin-top: 40px;" onclick="showView('booking')">Reserve a Mat</button>
-        </section>
-
-        <div class="fact-grid">
-            <div class="fact-card">
-                <span class="material-symbols-outlined">waves</span>
-                <h3>Sonic Healing</h3>
-                <p>Our Zen Den tracks are recorded at 432Hz—the natural frequency of the universe—to promote deep healing.</p>
-            </div>
-            <div class="fact-card">
-                <span class="material-symbols-outlined">filter_vintage</span>
-                <h3>Aromatherapy</h3>
-                <p>Every Aura session is infused with organic lavender mist to trigger immediate parasympathetic relaxation.</p>
-            </div>
-            <div class="fact-card">
-                <span class="material-symbols-outlined">flare</span>
-                <h3>Inner Light</h3>
-                <p>We believe yoga is 99% practice and 1% theory. Our virtual studio helps you focus on that 99%.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- VIEW: BOOKING -->
-    <main id="booking" class="view">
-        <div style="text-align:center; margin-bottom: 60px;">
-            <h2 style="font-size: 48px; font-weight: 400;">The Studio Floor</h2>
-            <p style="opacity: 0.6; letter-spacing: 1px;">Click a mat to reserve your energy.</p>
-        </div>
-        
-        <div class="studio-floor">
-            <div class="instructor-stage"></div>
-            <div class="mats-grid" id="matsContainer"></div>
-            
-            <div id="bookingAction" style="margin-top: 60px; display:none; animation: fadeIn 0.5s;">
-                <p id="matSelectionText" style="margin-bottom: 25px; font-family: 'Playfair Display'; font-size: 20px;"></p>
-                <button class="btn-aura" onclick="confirmBooking()">Confirm Reservation</button>
-            </div>
-        </div>
-    </main>
-
-    <!-- VIEW: ZEN DEN -->
-    <main id="zen" class="view">
-        <div id="zenGate">
-            <div class="auth-card">
-                <span class="material-symbols-outlined" style="font-size: 54px; color: var(--lavender-deep)">lock_open</span>
-                <h2 style="margin: 25px 0; font-weight: 400;">Member Portal</h2>
-                <input type="password" id="passcode" placeholder="••••">
-                <button class="btn-aura" style="width: 100%;" onclick="unlockZen()">Enter Sanctuary</button>
-                <p style="font-size: 11px; color: #aaa; margin-top: 25px; letter-spacing: 1px;">ACCESS CODE: YOGA2024</p>
-            </div>
-        </div>
-
-        <div id="zenContent" style="display:none; max-width: 800px; margin: 0 auto;">
-            <div style="text-align:center; margin-bottom: 50px;">
-                <h2 style="font-size: 48px; font-weight: 400;">Sonic Sanctuary</h2>
-                <p style="opacity:0.6;">High-fidelity frequencies for your home practice.</p>
-            </div>
-            
-            <div class="track-list">
-                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 'Morning Lavender', 'Ambient Flow')">
-                    <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-                    <div class="track-info">
-                        <p>Morning Lavender</p>
-                        <small>Ambient Flow • 15:00</small>
-                    </div>
-                </div>
-                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', 'Violet Meditation', 'Deep Sleep')">
-                    <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-                    <div class="track-info">
-                        <p>Violet Meditation</p>
-                        <small>Tibetan Bowls • 20:00</small>
-                    </div>
-                </div>
-                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', 'Aura Breathwork', 'Focus')">
-                    <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-                    <div class="track-info">
-                        <p>Aura Breathwork</p>
-                        <small>White Noise • 10:00</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- PERSISTENT FLOATING PLAYER -->
-    <div id="globalPlayer" class="zen-controller">
-        <div class="play-icon" style="width:40px; height:40px; background: white; color: var(--lavender-deep);">
-            <span class="material-symbols-outlined" style="font-size: 20px;">graphic_eq</span>
-        </div>
-        <div class="track-info">
-            <p id="playerTrackName">Now Playing</p>
-            <small id="playerTrackCategory">Zen Den Radio</small>
-        </div>
-        <audio id="mainAudio" controls style="height: 30px; width: 150px; filter: hue-rotate(240deg);"></audio>
-        <button onclick="closePlayer()" style="background:none; border:none; color:var(--lavender-deep); cursor:pointer;">
-            <span class="material-symbols-outlined">close</span>
-        </button>
-    </div>
-
-    <!-- CHAT FAB -->
-    <div class="chat-fab" onclick="alert('Namaste! Our guide will be with you shortly.')">
-        <span class="material-symbols-outlined">spa</span>
-    </div>
-
     <script>
-        // --- Navigation Logic ---
-        function showView(viewId) {
+        // --- Portal Logic ---
+        function enterSanctuary() {
+            const name = document.getElementById('userNameInput').value;
+            if(!name) return alert("Please tell us your name.");
+            
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('entry-portal').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('entry-portal').style.display = 'none';
+                document.getElementById('app').style.display = 'block';
+                setTimeout(() => document.getElementById('app').style.opacity = '1', 50);
+            }, 600);
+            initCalendar();
+        }
+
+        // --- View Controller ---
+        function showView(viewId, btn) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            if(viewId === 'booking') initStudio();
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('view-' + viewId).classList.add('active');
+            btn.classList.add('active');
+            
+            if(viewId === 'booking') initMats();
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // --- Booking Logic ---
-        let selectedMat = null;
-        function initStudio() {
-            const container = document.getElementById('matsContainer');
-            container.innerHTML = '';
-            for (let i = 1; i <= 15; i++) {
-                const isTaken = Math.random() < 0.35;
-                const mat = document.createElement('div');
-                mat.className = `mat ${isTaken ? 'occupied' : ''}`;
-                mat.innerHTML = `<span class="material-symbols-outlined" style="font-size:20px">${isTaken ? 'person' : 'spa'}</span>`;
-                if (!isTaken) {
-                    mat.onclick = () => {
-                        document.querySelectorAll('.mat').forEach(m => m.classList.remove('selected'));
-                        mat.classList.add('selected');
-                        selectedMat = i;
-                        document.getElementById('bookingAction').style.display = 'block';
-                        document.getElementById('matSelectionText').innerText = `Mat #${i} Selected`;
-                    };
-                }
-                container.appendChild(mat);
-            }
-        }
-        function confirmBooking() {
-            alert(`Mat #${selectedMat} is reserved for your next session. Breathe deep!`);
-            showView('home');
-        }
-
-        // --- Zen Den & Global Player Logic ---
-        function unlockZen() {
-            const pass = document.getElementById('passcode').value.toUpperCase();
-            if (pass === 'YOGA2024') {
-                document.getElementById('zenGate').style.display = 'none';
-                document.getElementById('zenContent').style.display = 'block';
+        // --- Admin Unlock ---
+        function unlockAdmin() {
+            const code = prompt("Enter Staff Access Key:");
+            if(code === "admin123") {
+                document.getElementById('nav-admin').style.display = 'flex';
+                alert("Dashboard Access Granted.");
             } else {
-                alert('The sanctuary remains closed. Try the hint.');
+                alert("Access Denied.");
             }
         }
 
-        function playTrack(url, name, category) {
-            const player = document.getElementById('globalPlayer');
-            const audio = document.getElementById('mainAudio');
-            
-            document.getElementById('playerTrackName').innerText = name;
-            document.getElementById('playerTrackCategory').innerText = category;
-            
-            player.classList.add('visible');
-            audio.src = url;
-            audio.play();
+        // --- Studio Logic ---
+        function initCalendar() {
+            const cal = document.getElementById('calendar');
+            for(let i=1; i<=31; i++) {
+                const d = document.createElement('div');
+                d.className = `cal-date ${i === 18 ? 'active' : ''}`;
+                d.innerText = i;
+                cal.appendChild(d);
+            }
         }
 
-        function closePlayer() {
-            const player = document.getElementById('globalPlayer');
-            const audio = document.getElementById('mainAudio');
-            player.classList.remove('visible');
-            audio.pause();
+        function initMats() {
+            const grid = document.getElementById('matGrid');
+            grid.innerHTML = '';
+            for(let i=1; i<=10; i++) {
+                const m = document.createElement('div');
+                m.className = 'cal-date';
+                m.style.border = '1px solid #F3E5F5';
+                m.innerText = i;
+                m.onclick = () => {
+                    document.querySelectorAll('#matGrid .cal-date').forEach(el => el.classList.remove('active'));
+                    m.classList.add('active');
+                    document.getElementById('bookBtn').style.display = 'inline-block';
+                };
+                grid.appendChild(m);
+            }
+        }
+
+        // --- Music Logic ---
+        function playTrack(name, time) {
+            const p = document.getElementById('player');
+            document.getElementById('p-name').innerText = name;
+            document.getElementById('p-time').innerText = time;
+            p.classList.add('visible');
         }
     </script>
 </body>
