@@ -3,335 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Yoga | Multilingual Sanctuary</title>
+    <title>Aura Yoga | Stuttgart Sanctuary</title>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #7D9D85; /* Sage Green */
-            --secondary: #E9E4D9; /* Soft Cream */
-            --dark: #2C3E50; /* Slate */
+            --primary: #967BB6; 
+            --primary-dark: #6D598A; 
+            --secondary: #F3E5F5; 
+            --bg-light: #FBF9FF; 
+            --dark: #2D2438; 
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.85);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark);
-            background-color: var(--secondary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+        /* --- Language Overlay --- */
+        #langOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--secondary); z-index: 5000; display: flex; align-items: center; justify-content: center;
         }
+        .lang-box { background: var(--white); padding: 50px; border-radius: 40px; text-align: center; box-shadow: 0 20px 60px rgba(150, 123, 182, 0.15); }
+        .lang-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .lang-btn { padding: 12px 25px; border: 2px solid var(--primary); border-radius: 50px; background: transparent; cursor: pointer; color: var(--primary); font-weight: 600; }
+        .lang-btn:hover { background: var(--primary); color: white; }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+        #mainContent { opacity: 0; transition: 1s ease; }
 
         /* --- Navigation --- */
         nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 15px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+            position: fixed; top: 0; width: 100%; padding: 20px 10%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--secondary);
         }
+        .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); text-decoration: none; }
 
-        .logo {
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-
-        .lang-switcher select {
-            padding: 5px 10px;
-            border-radius: 20px;
-            border: 1px solid var(--primary);
-            background: transparent;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            outline: none;
-        }
-
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                        url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
+            height: 70vh; background: linear-gradient(rgba(45, 36, 56, 0.3), rgba(45, 36, 56, 0.3)), 
+            url('https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
         }
+        .hero h1 { font-size: 4rem; font-family: 'Playfair Display', serif; }
 
-        .hero-content h1 { font-size: 4rem; margin-bottom: 20px; }
-
-        .btn {
-            padding: 15px 40px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: 0.4s;
-            display: inline-block;
-            border: 1px solid var(--primary);
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover { background: transparent; color: white; border: 1px solid white; transform: translateY(-3px); }
-
-        /* --- Modal / Form Styling --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 30px;
-            width: 90%;
-            max-width: 450px;
-            position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-        }
-
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; }
-
-        .booking-form { display: flex; flex-direction: column; gap: 15px; }
-        .booking-form h2 { color: var(--primary); text-align: center; margin-bottom: 10px;}
-        .booking-form label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #888; margin-bottom: -10px;}
-        
-        .booking-form input, .booking-form select {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .submit-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-
-        /* --- Classes Section --- */
+        /* --- Sections --- */
         .section { padding: 80px 10%; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: var(--white); padding: 30px; border-radius: 20px; transition: 0.4s; cursor: pointer; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-        .card i { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: var(--white); padding: 40px; border-radius: 30px; border: 1px solid var(--secondary); cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
 
-        footer { background: var(--dark); color: var(--secondary); padding: 30px 10%; text-align: center; font-size: 0.9rem; }
+        /* --- Weather & Map Section --- */
+        .location-container {
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; margin-top: 40px; text-align: left;
+        }
+        .weather-card {
+            background: var(--white); padding: 30px; border-radius: 30px; border: 1px solid var(--secondary);
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .map-card { border-radius: 30px; overflow: hidden; border: 1px solid var(--secondary); height: 400px; }
+
+        /* --- Booking Modal --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(45, 36, 56, 0.7); backdrop-filter: blur(10px); align-items: center; justify-content: center;
+        }
+        .modal-content { background: var(--white); padding: 40px; border-radius: 35px; width: 95%; max-width: 500px; position: relative; }
+        .mat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+        .mat { aspect-ratio: 1/1.3; background: var(--secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .mat.taken { background: #eee; color: #ccc; cursor: not-allowed; }
+        .mat:hover:not(.taken) { background: var(--primary); color: white; }
+
+        .booking-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        .booking-form input, .booking-form select { padding: 12px; border: 1px solid var(--secondary); border-radius: 10px; background: var(--bg-light); }
+        .submit-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+
+        footer { text-align: center; padding: 40px; background: var(--dark); color: var(--secondary); }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .nav-right ul { display: none; }
+            .location-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">AURA YOGA</a>
-        <div class="nav-right">
-            <div class="lang-switcher">
-                <select id="langSelect" onchange="changeLanguage()">
-                    <option value="en">English</option>
-                    <option value="hi">हिन्दी (Hindi)</option>
-                    <option value="mr">मराठी (Marathi)</option>
-                    <option value="de">Deutsch (German)</option>
-                </select>
+    <!-- LANGUAGE OVERLAY -->
+    <div id="langOverlay">
+        <div class="lang-box">
+            <i class="fa-solid fa-om" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h2>Namaste</h2>
+            <p>Select your language | भाषा निवडा</p>
+            <div class="lang-options">
+                <button class="lang-btn" onclick="setLanguage('en')">English</button>
+                <button class="lang-btn" onclick="setLanguage('hi')">हिन्दी</button>
+                <button class="lang-btn" onclick="setLanguage('mr')">मराठी</button>
+                <button class="lang-btn" onclick="setLanguage('de')">Deutsch</button>
             </div>
-        </div>
-    </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 id="hero-title">Find Your Balance.</h1>
-            <p id="hero-sub">Join our community and discover the peace within.</p>
-            <button class="btn" id="hero-btn" onclick="openModal()">Begin Your Practice</button>
-        </div>
-    </section>
-
-    <section id="classes" class="section">
-        <h2 id="class-title" style="font-size: 2.5rem;">Our Mindful Sessions</h2>
-        <div class="grid">
-            <div class="card" onclick="openModal()">
-                <i class="fa-solid fa-leaf"></i>
-                <h3 id="c1-t">Hatha Flow</h3>
-                <p id="c1-d">Focus on alignment and breath.</p>
-            </div>
-            <div class="card" onclick="openModal()">
-                <i class="fa-solid fa-wind"></i>
-                <h3 id="c2-t">Vinyasa</h3>
-                <p id="c2-d">Dynamic, flowing practice.</p>
-            </div>
-            <div class="card" onclick="openModal()">
-                <i class="fa-solid fa-moon"></i>
-                <h3 id="c3-t">Yin Yoga</h3>
-                <p id="c3-d">Restorative poses for calm.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- THE MODAL FORM -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            
-            <!-- REPLACE 'YOUR_ID_HERE' WITH YOUR FORMSPREE ID -->
-            <form class="booking-form" action="https://formspree.io/f/mwvzoeao" method="POST">
-                <h2 id="form-title">Book Your Batch</h2>
-                
-                <label id="l-name">Full Name</label>
-                <input type="text" name="name" required>
-
-                <label id="l-email">Email Address</label>
-                <input type="email" name="email" required>
-
-                <label id="l-date">Select Date</label>
-                <input type="date" id="bookingDate" name="date" required>
-
-                <label id="l-batch">Choose Batch</label>
-                <select name="batch" id="batchSelect" required>
-                    <option value="" disabled selected id="opt-default">Select a time slot</option>
-                    <option value="Morning" id="opt-morn">Morning (6:00 AM)</option>
-                    <option value="Noon" id="opt-noon">Mid-Day (12:00 PM)</option>
-                    <option value="Evening" id="opt-even">Evening (5:30 PM)</option>
-                </select>
-
-                <button type="submit" class="submit-btn" id="form-btn">Confirm Booking</button>
-            </form>
         </div>
     </div>
 
-    <footer>
-        <p id="footer-text">&copy; 2024 Aura Yoga Studio. Namaste.</p>
-    </footer>
+    <!-- MAIN CONTENT -->
+    <div id="mainContent">
+        <nav>
+            <a href="#" class="logo">AURA YOGA</a>
+            <div id="currentLangTag" style="font-size: 0.7rem; color: var(--primary-dark); font-weight: 600;"></div>
+        </nav>
+
+        <section class="hero">
+            <div>
+                <h1 id="hero-title">Serenity in Stuttgart.</h1>
+                <p id="hero-sub">Your journey to mindfulness begins here.</p>
+            </div>
+        </section>
+
+        <!-- CLASSES -->
+        <section class="section">
+            <h2 id="class-heading">Our Sessions</h2>
+            <div class="grid">
+                <div class="card" onclick="openBooking('Hatha Flow')">
+                    <i class="fa-solid fa-spa"></i>
+                    <h3 id="c1-t">Hatha Flow</h3>
+                    <p id="c1-d">Gentle movement and breath.</p>
+                </div>
+                <div class="card" onclick="openBooking('Vinyasa')">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                    <h3 id="c2-t">Vinyasa</h3>
+                    <p id="c2-d">Energetic flow and strength.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WEATHER & MAP -->
+        <section class="section" style="background: var(--secondary);">
+            <h2 id="loc-title">Find Us in Stuttgart</h2>
+            <div class="location-container">
+                <!-- Weather Widget -->
+                <div class="weather-card">
+                    <h3 id="weather-label" style="margin-bottom: 15px; color: var(--primary-dark);">Current Weather</h3>
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/48p789p18/stuttgart/" data-label_1="STUTTGART" data-label_2="WEATHER" data-font="Poppins" data-icons="Climacons Animated" data-mode="Current" data-theme="pure" data-basecolor="" data-accent="" data-textcolor="#967BB6" >STUTTGART WEATHER</a>
+                    <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                    </script>
+                </div>
+                <!-- Google Map -->
+                <div class="map-card">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db34c1ad8fd3%3A0x79d5c11c7791cfe4!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <span style="position:absolute; top:20px; right:25px; cursor:pointer;" onclick="closeModal()">&times;</span>
+                <div id="step1">
+                    <h2 id="map-title" style="text-align:center;">Select Your Mat</h2>
+                    <div class="mat-grid" id="matGrid"></div>
+                </div>
+                <div id="step2" style="display:none;">
+                    <h2 id="form-title">Registration</h2>
+                    <p id="selection-summary" style="color:var(--primary); margin-bottom:15px;"></p>
+                    <form class="booking-form" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
+                        <input type="hidden" name="mat" id="hiddenMat">
+                        <input type="hidden" name="class" id="hiddenClass">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="date" id="bookingDate" name="date" required>
+                        <select name="batch" required>
+                            <option value="Morning">Morning (6:30 AM)</option>
+                            <option value="Evening">Evening (6:30 PM)</option>
+                        </select>
+                        <button type="submit" class="submit-btn" id="form-btn">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Aura Yoga Studio Stuttgart. Namaste.</p>
+        </footer>
+    </div>
 
     <script>
         const translations = {
             en: {
-                heroTitle: "Find Your Balance.",
-                heroSub: "Join our community and discover the peace within.",
-                heroBtn: "Begin Your Practice",
-                classTitle: "Our Mindful Sessions",
-                c1T: "Hatha Flow", c1D: "Focus on alignment and breath.",
-                c2T: "Vinyasa", c2D: "Dynamic, flowing practice.",
-                c3T: "Yin Yoga", c3D: "Restorative poses for calm.",
-                formTitle: "Book Your Batch",
-                lName: "Full Name", lEmail: "Email Address", lDate: "Select Date", lBatch: "Choose Batch",
-                optDef: "Select a time slot", optMorn: "Morning (6:00 AM)", optNoon: "Mid-Day (12:00 PM)", optEven: "Evening (5:30 PM)",
-                formBtn: "Confirm Booking",
-                footer: "© 2024 Aura Yoga Studio. Namaste."
+                heroTitle: "Serenity in Stuttgart.", heroSub: "Your journey to mindfulness begins here.",
+                classHeading: "Our Sessions", c1T: "Hatha Flow", c1D: "Gentle movement.",
+                c2T: "Vinyasa", c2D: "Energetic flow.", locTitle: "Find Us in Stuttgart",
+                weatherLabel: "Current Weather", mapTitle: "Select Your Mat", formTitle: "Registration", formBtn: "Book Now"
             },
             hi: {
-                heroTitle: "अपना संतुलन खोजें।",
-                heroSub: "हमारे समुदाय में शामिल हों और भीतर की शांति पाएं।",
-                heroBtn: "अपना अभ्यास शुरू करें",
-                classTitle: "हमारे सत्र",
-                c1T: "हठ योग", c1D: "संरेखण और सांस पर ध्यान दें।",
-                c2T: "विन्यास", c2D: "गतिशील, बहने वाला अभ्यास।",
-                c3T: "यिन योग", c3D: "शांति के लिए आरामदायक मुद्राएं।",
-                formTitle: "अपना बैच बुक करें",
-                lName: "पूरा नाम", lEmail: "ईमेल पता", lDate: "तारीख चुनें", lBatch: "बैच चुनें",
-                optDef: "समय चुनें", optMorn: "सुबह (6:00 AM)", optNoon: "दोपहर (12:00 PM)", optEven: "शाम (5:30 PM)",
-                formBtn: "बुकिंग की पुष्टि करें",
-                footer: "© 2024 औरा योग स्टूडियो। नमस्ते।"
+                heroTitle: "स्टटगार्ट में शांति।", heroSub: "आपकी जागरूकता की यात्रा यहाँ शुरू होती है।",
+                classHeading: "हमारे सत्र", c1T: "हठ योग", c1D: "कोमल गतिविधि।",
+                c2T: "विन्यास", c2D: "ऊर्जावान प्रवाह।", locTitle: "हमें स्टटगार्ट में खोजें",
+                weatherLabel: "वर्तमान मौसम", mapTitle: "अपनी मैट चुनें", formTitle: "पंजीकरण", formBtn: "अभी बुक करें"
             },
             mr: {
-                heroTitle: "स्वतःचे संतुलन शोधा.",
-                heroSub: "आमच्या समुदायात सामील व्हा आणि आंतरिक शांती मिळवा.",
-                heroBtn: "आपला सराव सुरू करा",
-                classTitle: "आमचे सत्र",
-                c1T: "हठ योग", c1D: "संरेखन आणि श्वासावर लक्ष केंद्रित करा.",
-                c2T: "विन्यास", c2D: "गतिमान आणि प्रवाही सराव.",
-                c3T: "यिन योग", c3D: "शांततेसाठी आरामदायी योगासने.",
-                formTitle: "तुमची बॅच बुक करा",
-                lName: "पूर्ण नाव", lEmail: "ईमेल पत्ता", lDate: "तारीख निवडा", lBatch: "बॅच निवडा",
-                optDef: "वेळ निवडा", optMorn: "सकाळ (6:00 AM)", optNoon: "दुपार (12:00 PM)", optEven: "संध्याकाळ (5:30 PM)",
-                formBtn: "बुकिंगची पुष्टी करा",
-                footer: "© 2024 ऑरा योग स्टुडिओ. नमस्ते."
+                heroTitle: "स्टटगार्टमध्ये शांतता.", heroSub: "तुमचा सजगतेचा प्रवास येथे सुरू होतो.",
+                classHeading: "आमचे सत्र", c1T: "हठ योग", c1D: "सौम्य हालचाल.",
+                c2T: "विन्यास", c2D: "ऊर्जावान प्रवाह.", locTitle: "आम्हाला स्टटगार्टमध्ये शोधा",
+                weatherLabel: "सध्याचे हवामान", mapTitle: "तुमची मॅट निवडा", formTitle: "नोंदणी", formBtn: "आता बुक करा"
             },
             de: {
-                heroTitle: "Finden Sie Ihr Gleichgewicht.",
-                heroSub: "Treten Sie unserer Community bei und finden Sie inneren Frieden.",
-                heroBtn: "Beginnen Sie Ihre Praxis",
-                classTitle: "Unsere Sitzungen",
-                c1T: "Hatha Flow", c1D: "Fokus auf Ausrichtung und Atem.",
-                c2T: "Vinyasa", c2D: "Dynamische, fließende Praxis.",
-                c3T: "Yin Yoga", c3D: "Erholsame Posen für mehr Ruhe.",
-                formTitle: "Kurs Buchen",
-                lName: "Vollständiger Name", lEmail: "E-Mail-Adresse", lDate: "Datum wählen", lBatch: "Zeitraum wählen",
-                optDef: "Zeitfenster wählen", optMorn: "Morgen (6:00 Uhr)", optNoon: "Mittag (12:00 Uhr)", optEven: "Abend (17:30 Uhr)",
-                formBtn: "Buchung bestätigen",
-                footer: "© 2024 Aura Yoga Studio. Namaste."
+                heroTitle: "Gelassenheit in Stuttgart.", heroSub: "Deine Reise zur Achtsamkeit beginnt hier.",
+                classHeading: "Unsere Kurse", c1T: "Hatha Flow", c1D: "Sanfte Bewegung.",
+                c2T: "Vinyasa", c2D: "Energetischer Flow.", locTitle: "Finden Sie uns in Stuttgart",
+                weatherLabel: "Aktuelles Wetter", mapTitle: "Wähle deine Matte", formTitle: "Registrierung", formBtn: "Jetzt buchen"
             }
         };
 
-        function changeLanguage() {
-            const lang = document.getElementById("langSelect").value;
+        function setLanguage(lang) {
             const t = translations[lang];
+            document.getElementById('hero-title').innerText = t.heroTitle;
+            document.getElementById('hero-sub').innerText = t.heroSub;
+            document.getElementById('class-heading').innerText = t.classHeading;
+            document.getElementById('c1-t').innerText = t.c1T; document.getElementById('c1-d').innerText = t.c1D;
+            document.getElementById('c2-t').innerText = t.c2T; document.getElementById('c2-d').innerText = t.c2D;
+            document.getElementById('loc-title').innerText = t.locTitle;
+            document.getElementById('weather-label').innerText = t.weatherLabel;
+            document.getElementById('map-title').innerText = t.mapTitle;
+            document.getElementById('form-title').innerText = t.formTitle;
+            document.getElementById('form-btn').innerText = t.formBtn;
+            document.getElementById('currentLangTag').innerText = "Lang: " + lang;
 
-            document.getElementById("hero-title").innerText = t.heroTitle;
-            document.getElementById("hero-sub").innerText = t.heroSub;
-            document.getElementById("hero-btn").innerText = t.heroBtn;
-            document.getElementById("class-title").innerText = t.classTitle;
-            document.getElementById("c1-t").innerText = t.c1T; document.getElementById("c1-d").innerText = t.c1D;
-            document.getElementById("c2-t").innerText = t.c2T; document.getElementById("c2-d").innerText = t.c2D;
-            document.getElementById("c3-t").innerText = t.c3T; document.getElementById("c3-d").innerText = t.c3D;
-            document.getElementById("form-title").innerText = t.formTitle;
-            document.getElementById("l-name").innerText = t.lName;
-            document.getElementById("l-email").innerText = t.lEmail;
-            document.getElementById("l-date").innerText = t.lDate;
-            document.getElementById("l-batch").innerText = t.lBatch;
-            document.getElementById("opt-default").innerText = t.optDef;
-            document.getElementById("opt-morn").innerText = t.optMorn;
-            document.getElementById("opt-noon").innerText = t.optNoon;
-            document.getElementById("opt-even").innerText = t.optEven;
-            document.getElementById("form-btn").innerText = t.formBtn;
-            document.getElementById("footer-text").innerText = t.footer;
+            document.getElementById('langOverlay').style.display = 'none';
+            document.getElementById('mainContent').style.opacity = '1';
         }
 
-        function openModal() { document.getElementById("bookingModal").style.display = "flex"; }
-        function closeModal() { document.getElementById("bookingModal").style.display = "none"; }
-        window.onclick = function(event) { if (event.target == document.getElementById("bookingModal")) closeModal(); }
-        
-        // Set min date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('bookingDate').setAttribute('min', today);
-    </script>
+        // Mat Logic
+        const grid = document.getElementById('matGrid');
+        for (let i = 1; i <= 12; i++) {
+            const mat = document.createElement('div');
+            mat.className = 'mat';
+            mat.innerText = i;
+            if ([3, 8].includes(i)) mat.className = 'mat taken';
+            else mat.onclick = () => selectMat(i);
+            grid.appendChild(mat);
+        }
 
+        let selectedClass = "";
+        function openBooking(cls) {
+            selectedClass = cls;
+            document.getElementById('hiddenClass').value = cls;
+            document.getElementById('bookingModal').style.display = 'flex';
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+        }
+
+        function selectMat(num) {
+            document.getElementById('hiddenMat').value = num;
+            document.getElementById('selection-summary').innerText = selectedClass + " | Mat #" + num;
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+        }
+
+        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+        document.getElementById('bookingDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+    </script>
 </body>
 </html>
