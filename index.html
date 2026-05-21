@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenYoga - Online Studio</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary: #8da399; /* Sage Green */
+            --secondary: #f7f9f9; /* Off White */
+            --accent: #d4a373; /* Earthy Tone */
+            --text: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { background-color: var(--secondary); color: var(--text); }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        
+        .nav-links button {
+            background: none;
+            border: none;
+            margin-left: 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        .nav-links button:hover, .nav-links button.active { color: var(--primary); font-weight: bold; }
+        
+        .btn-login {
+            background-color: var(--primary) !important;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* Sections */
+        section { padding: 2rem; min-height: 80vh; display: none; animation: fadeIn 0.5s; }
+        section.active-section { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { margin-bottom: 1.5rem; color: var(--text); border-left: 5px solid var(--primary); padding-left: 10px; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        /* VIDEOS */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover { transform: translateY(-5px); }
+
+        .thumbnail {
+            height: 180px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-info { padding: 1rem; }
+        .tag { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* CALENDAR */
+        .calendar-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cal-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+
+        .day-name { font-weight: bold; color: var(--primary); }
+        
+        .day {
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .day:hover { background-color: #eee; }
+        .day.today { border: 2px solid var(--primary); font-weight: bold; }
+        .day.has-event { background-color: rgba(141, 163, 153, 0.2); }
+        .day.selected { background-color: var(--primary); color: white; }
+
+        /* LOGIN MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Utility */
+        .btn { padding: 10px 20px; cursor: pointer; background: var(--primary); color: white; border: none; border-radius: 5px; }
+        .blur { filter: blur(5px); pointer-events: none; }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">🧘‍♀️ ZenYoga</div>
+        <div class="nav-links">
+            <button onclick="showSection('home')" id="nav-home" class="active">Home</button>
+            <button onclick="showSection('videos')" id="nav-videos">Classes</button>
+            <button onclick="showSection('calendar')" id="nav-calendar">Calendar</button>
+            <button onclick="toggleLoginModal()" class="btn-login" id="auth-btn">Login</button>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="active-section">
+        <div class="hero" style="height: 80vh;">
+            <h1>Find Your Inner Peace</h1>
+            <p style="margin: 1rem 0;">Stream unlimited yoga classes from anywhere.</p>
+            <button class="btn" onclick="showSection('videos')">Start Practicing</button>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section id="videos">
+        <h2>Daily Classes</h2>
+        <div class="video-grid" id="video-container">
+            <!-- Videos injected via JS -->
+        </div>
+    </section>
+
+    <!-- CALENDAR SECTION -->
+    <section id="calendar">
+        <h2>Schedule</h2>
+        <div class="calendar-container">
+            <div class="cal-header">
+                <button class="btn" onclick="changeMonth(-1)">&#8592;</button>
+                <h3 id="current-month-year">Month Year</h3>
+                <button class="btn" onclick="changeMonth(1)">&#8594;</button>
+            </div>
+            <div class="days-grid">
+                <div class="day-name">Sun</div><div class="day-name">Mon</div><div class="day-name">Tue</div>
+                <div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
+                <div id="calendar-days" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;">
+                    <!-- Days injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGIN MODAL -->
+    <div id="login-modal" class="modal">
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <p>Login to track your progress</p>
+            <form onsubmit="handleLogin(event)">
+                <input type="email" placeholder="Email" required id="email-input">
+                <input type="password" placeholder="Password" required id="pass-input">
+                <button type="submit">Login</button>
+                <button type="button" onclick="toggleLoginModal()" style="background:#ccc; margin-top:5px;">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+
+        // 1. STATE MANAGEMENT
+        let isLoggedIn = false;
+        let currentDate = new Date();
+        
+        // 2. VIDEOS DATA (Mock Database)
+        const videos = [
+            { title: "Morning Flow", level: "Beginner", img: "https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=500&q=60" },
+            { title: "Power Vinyasa", level: "Advanced", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=500&q=60" },
+            { title: "Deep Stretch", level: "All Levels", img: "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=500&q=60" },
+            { title: "Meditation", level: "Relax", img: "https://images.unsplash.com/photo-1518611012118-696072aa979a?auto=format&fit=crop&w=500&q=60" },
+            { title: "Core Yoga", level: "Intermediate", img: "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=500&q=60" },
+            { title: "Sunset Salutation", level: "Beginner", img: "https://images.unsplash.com/photo-1544367563-12123d8965cd?auto=format&fit=crop&w=500&q=60" }
+        ];
+
+        // 3. INITIALIZATION
+        window.onload = () => {
+            renderVideos();
+            renderCalendar();
+        };
+
+        // 4. NAVIGATION LOGIC
+        function showSection(id) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active-section'));
+            // Show target section
+            document.getElementById(id).classList.add('active-section');
+            
+            // Update Nav Highlighting
+            document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+            
+            // Special case for Home button vs others
+            if(id === 'home') document.getElementById('nav-home').classList.add('active');
+            else if(id === 'videos') document.getElementById('nav-videos
