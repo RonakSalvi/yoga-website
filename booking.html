@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Mat | Aura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Google+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        :root { --md-primary: #006a6a; --md-surface: #f4fbf9; --radius-xl: 28px; }
+        body { font-family: 'Roboto', sans-serif; background: var(--md-surface); margin: 0; }
+        nav { height: 64px; display: flex; align-items: center; padding: 0 24px; background: white; border-bottom: 1px solid #dae5e4; }
+        .nav-links a { text-decoration: none; color: #444; margin-left: 20px; font-size: 14px; }
+        
+        .studio-container { max-width: 800px; margin: 40px auto; padding: 20px; text-align: center; }
+        .instructor-area { width: 100px; height: 6px; background: var(--md-primary); margin: 0 auto 40px; border-radius: 10px; position: relative; }
+        .instructor-area::after { content: 'INSTRUCTOR'; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--md-primary); font-weight: bold; }
+
+        .mats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 400px; margin: 0 auto; }
+        .mat { aspect-ratio: 1/2; border: 2px dashed #ccc; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .mat.occupied { background: #e0e0e0; border-style: solid; cursor: not-allowed; color: #999; }
+        .mat.selected { background: var(--md-primary); border-style: solid; color: white; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="flex-grow:1; font-family:'Google Sans'; color:var(--md-primary)">Aura Booking</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="booking.html">Book a Mat</a>
+            <a href="zen-den.html">Zen Den</a>
+        </div>
+    </nav>
+
+    <div class="studio-container">
+        <h2 style="font-family:'Google Sans'; margin-bottom: 10px;">Reserve Your Spot</h2>
+        <p style="color:#666; margin-bottom: 40px;">Choose a mat to see the instructor clearly.</p>
+        
+        <div class="instructor-area"></div>
+        <div class="mats-grid" id="grid"></div>
+        
+        <button id="confirmBtn" style="margin-top:40px; display:none; background:var(--md-primary); color:white; border:none; padding:12px 40px; border-radius:100px; cursor:pointer;">Confirm Selection</button>
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        for (let i = 1; i <= 12; i++) {
+            const isOccupied = Math.random() < 0.3;
+            const mat = document.createElement('div');
+            mat.className = `mat ${isOccupied ? 'occupied' : ''}`;
+            mat.innerHTML = `<span class="material-symbols-outlined">${isOccupied ? 'person' : 'spa'}</span>`;
+            if (!isOccupied) {
+                mat.onclick = () => {
+                    document.querySelectorAll('.mat').forEach(m => m.classList.remove('selected'));
+                    mat.classList.add('selected');
+                    document.getElementById('confirmBtn').style.display = 'inline-block';
+                };
+            }
+            grid.appendChild(mat);
+        }
+    </script>
+</body>
+</html>
