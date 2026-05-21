@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Wellness | The All-in-One Sanctuary</title>
+    <title>Aura Wellness | The Infinite Sanctuary</title>
     
-    <!-- Sophisticated Typography -->
+    <!-- Premium Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
     
@@ -15,9 +15,10 @@
             --lavender-mid: #9575CD;
             --lavender-soft: #F3E5F5;
             --lavender-mist: #FDFBFF;
-            --glass: rgba(255, 255, 255, 0.7);
+            --glass: rgba(255, 255, 255, 0.8);
             --text-main: #2D2438;
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 40px;
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,122 +32,127 @@
 
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
-        /* --- Background Elements --- */
-        .orb {
-            position: fixed; width: 400px; height: 400px;
-            background: radial-gradient(circle, var(--lavender-soft) 0%, rgba(255,255,255,0) 70%);
-            z-index: -1; filter: blur(50px); animation: float 20s infinite alternate;
-        }
-
-        @keyframes float {
-            from { transform: translate(-10%, -10%); }
-            to { transform: translate(20%, 20%); }
+        /* --- Animated Background --- */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(243, 229, 245, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(225, 190, 231, 0.3) 0%, transparent 50%);
+            z-index: -1;
         }
 
         /* --- Navigation --- */
         nav {
-            position: fixed; top: 0; width: 100%; height: 80px;
+            position: fixed; top: 0; width: 100%; height: 90px;
             display: flex; align-items: center; padding: 0 5%;
             background: var(--glass); backdrop-filter: blur(20px);
             z-index: 1000; border-bottom: 1px solid rgba(103, 80, 164, 0.1);
         }
-        .nav-brand { font-family: 'Playfair Display'; font-size: 28px; color: var(--lavender-deep); flex-grow: 1; font-style: italic; cursor: pointer; }
+        .nav-brand { font-family: 'Playfair Display'; font-size: 32px; color: var(--lavender-deep); flex-grow: 1; font-style: italic; cursor: pointer; }
         .nav-links button { 
             background: none; border: none; color: var(--text-main); 
-            margin-left: 30px; font-size: 12px; letter-spacing: 2px; 
-            text-transform: uppercase; font-weight: 500; cursor: pointer;
-            transition: 0.3s;
+            margin-left: 30px; font-size: 11px; letter-spacing: 2px; 
+            text-transform: uppercase; font-weight: 600; cursor: pointer;
+            transition: 0.3s; opacity: 0.7;
         }
-        .nav-links button:hover { color: var(--lavender-deep); }
+        .nav-links button:hover { opacity: 1; color: var(--lavender-deep); }
 
         /* --- View Management --- */
-        .view { display: none; padding: 120px 5% 60px; min-height: 100vh; animation: fadeIn 0.8s ease; }
-        .view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .view { display: none; padding: 140px 5% 120px; min-height: 100vh; }
+        .view.active { display: block; animation: slideUp 1s ease forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- Home View --- */
-        .hero { text-align: center; max-width: 900px; margin: 0 auto 80px; }
-        .hero h1 { font-size: clamp(40px, 8vw, 72px); line-height: 1.1; margin-bottom: 24px; }
-        .hero p { font-size: 18px; font-weight: 300; letter-spacing: 1px; color: #666; }
-
+        .hero { text-align: center; max-width: 900px; margin: 0 auto 100px; }
+        .hero h1 { font-size: clamp(40px, 7vw, 85px); line-height: 1; margin-bottom: 30px; font-weight: 400; }
+        .hero h1 i { font-weight: 400; }
+        
         .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .fact-card { 
-            background: white; padding: 40px; border-radius: 40px 4px;
-            box-shadow: 0 15px 35px rgba(103, 80, 164, 0.05);
-            border: 1px solid var(--lavender-soft); transition: var(--transition);
+            background: white; padding: 50px; border-radius: var(--radius);
+            box-shadow: 0 20px 40px rgba(103, 80, 164, 0.04);
+            border: 1px solid white; transition: var(--transition);
         }
-        .fact-card:hover { transform: translateY(-10px); border-color: var(--lavender-mid); }
-        .fact-card span { color: var(--lavender-deep); font-size: 40px; margin-bottom: 20px; display: block; }
+        .fact-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(103, 80, 164, 0.08); }
+        .fact-card span { color: var(--lavender-deep); font-size: 48px; margin-bottom: 25px; display: block; }
 
         /* --- Booking View --- */
         .studio-floor { 
-            background: white; padding: 60px 20px; border-radius: 40px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.03); max-width: 700px; margin: 0 auto;
-            border: 1px solid var(--lavender-soft);
+            background: white; padding: 80px 40px; border-radius: var(--radius); 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.03); max-width: 800px; margin: 0 auto;
+            border: 1px solid white; text-align: center;
         }
         .instructor-stage { 
-            width: 120px; height: 4px; background: var(--lavender-deep); 
-            margin: 0 auto 60px; border-radius: 10px; position: relative;
+            width: 140px; height: 2px; background: var(--lavender-deep); 
+            margin: 0 auto 80px; position: relative;
         }
-        .instructor-stage::after { content: 'INSTRUCTOR'; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 3px; color: var(--lavender-deep); font-weight: bold; }
+        .instructor-stage::after { content: 'INSTRUCTOR'; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 4px; color: var(--lavender-deep); opacity: 0.6; }
 
-        .mats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 500px; margin: 0 auto; }
+        .mats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 550px; margin: 0 auto; }
         .mat { 
-            aspect-ratio: 1/1.8; border: 1px solid var(--lavender-soft); border-radius: 8px; 
+            aspect-ratio: 1/1.8; border: 1px solid var(--lavender-soft); border-radius: 12px; 
             cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: var(--transition); background: #fff;
         }
-        .mat.occupied { background: #f5f5f5; border: none; cursor: not-allowed; opacity: 0.3; }
-        .mat.selected { background: var(--lavender-deep); transform: scale(1.1); color: white; border: none; }
+        .mat.occupied { background: #f8f8f8; border: none; cursor: not-allowed; opacity: 0.3; }
+        .mat.selected { background: var(--lavender-deep); transform: scale(1.1); color: white; border: none; box-shadow: 0 10px 20px rgba(103, 80, 164, 0.3); }
 
         /* --- Zen Den View --- */
         .auth-card { 
-            max-width: 400px; margin: 100px auto; padding: 50px; 
-            background: var(--glass); backdrop-filter: blur(20px);
-            border-radius: 40px; text-align: center; border: 1px solid white;
+            max-width: 450px; margin: 60px auto; padding: 60px; 
+            background: white; border-radius: var(--radius); 
+            text-align: center; border: 1px solid white; box-shadow: 0 30px 60px rgba(0,0,0,0.05);
         }
-        .track-list { max-width: 600px; margin: 40px auto; }
         .track-card { 
-            background: white; padding: 20px; border-radius: 20px; margin-bottom: 15px;
-            display: flex; align-items: center; gap: 20px; cursor: pointer;
-            border: 1px solid var(--lavender-soft); transition: 0.3s;
+            background: white; padding: 25px; border-radius: 25px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 25px; cursor: pointer;
+            border: 1px solid white; transition: 0.3s;
         }
-        .track-card:hover { background: var(--lavender-soft); }
-        .play-icon { background: var(--lavender-deep); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .track-card:hover { background: var(--lavender-soft); transform: translateX(10px); }
+        .play-icon { background: var(--lavender-deep); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* --- GLOBAL FLOATING PLAYER --- */
+        .zen-controller {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(150%);
+            width: 90%; max-width: 500px; background: var(--glass); 
+            backdrop-filter: blur(25px); padding: 15px 30px; border-radius: 100px;
+            display: flex; align-items: center; gap: 20px;
+            box-shadow: 0 20px 50px rgba(103, 80, 164, 0.2);
+            border: 1px solid white; z-index: 2000; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .zen-controller.visible { transform: translateX(-50%) translateY(0); }
+        .track-info { flex-grow: 1; }
+        .track-info p { font-size: 14px; font-weight: 600; color: var(--lavender-deep); }
+        .track-info small { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; }
 
         /* --- Chat UI --- */
         .chat-fab {
             position: fixed; bottom: 30px; right: 30px;
             background: var(--lavender-deep); color: white;
-            width: 60px; height: 60px; border-radius: 30px;
+            width: 65px; height: 65px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 30px rgba(103, 80, 164, 0.3);
-            cursor: pointer; z-index: 1000;
+            box-shadow: 0 15px 35px rgba(103, 80, 164, 0.3);
+            cursor: pointer; z-index: 1000; transition: 0.3s;
         }
-        .chat-window {
-            position: fixed; bottom: 100px; right: 30px; width: 320px;
-            background: white; border-radius: 30px; display: none;
-            flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            overflow: hidden; z-index: 1000; border: 1px solid var(--lavender-soft);
-        }
+        .chat-fab:hover { transform: rotate(15deg) scale(1.1); }
 
-        /* --- Buttons & Inputs --- */
-        .btn-primary {
+        /* --- UI Elements --- */
+        .btn-aura {
             background: var(--lavender-deep); color: white; border: none;
-            padding: 16px 40px; border-radius: 100px; font-family: 'Playfair Display';
-            font-size: 16px; cursor: pointer; transition: 0.3s;
+            padding: 18px 45px; border-radius: 100px; font-family: 'Playfair Display';
+            font-size: 18px; cursor: pointer; transition: 0.3s;
         }
-        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(103, 80, 164, 0.2); }
+        .btn-aura:hover { letter-spacing: 1px; box-shadow: 0 15px 30px rgba(103, 80, 164, 0.2); }
+        
         input { 
-            width: 100%; padding: 15px; border-radius: 15px; 
-            border: 1px solid var(--lavender-soft); margin-bottom: 20px; outline: none;
-            text-align: center; font-size: 18px;
+            width: 100%; padding: 20px; border-radius: 20px; 
+            border: 1px solid var(--lavender-soft); margin-bottom: 25px; outline: none;
+            text-align: center; font-size: 20px; font-family: 'Inter';
         }
     </style>
 </head>
 <body>
 
-    <div class="orb"></div>
+    <div class="bg-glow"></div>
 
     <nav>
         <div class="nav-brand" onclick="showView('home')">Aura</div>
@@ -160,44 +166,47 @@
     <!-- VIEW: HOME -->
     <main id="home" class="view active">
         <section class="hero">
-            <h1>The Future of <br><i>Inner Peace.</i></h1>
-            <p>Welcome to Aura Wellness. We believe in the power of lavender, the strength of silence, and the beauty of a focused mind.</p>
+            <h1>Find your flow <br>in <i>Lavender.</i></h1>
+            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8; opacity: 0.7;">
+                Aura is more than a studio. It is a digital and physical sanctuary designed to help you reconnect with your breath and your light.
+            </p>
+            <button class="btn-aura" style="margin-top: 40px;" onclick="showView('booking')">Reserve a Mat</button>
         </section>
 
         <div class="fact-grid">
             <div class="fact-card">
-                <span class="material-symbols-outlined">history_edu</span>
-                <h3>Ancient Roots</h3>
-                <p>Yoga originated over 5,000 years ago. We preserve that history while adding a modern, digital touch.</p>
+                <span class="material-symbols-outlined">waves</span>
+                <h3>Sonic Healing</h3>
+                <p>Our Zen Den tracks are recorded at 432Hz—the natural frequency of the universe—to promote deep healing.</p>
             </div>
             <div class="fact-card">
-                <span class="material-symbols-outlined">psychology_alt</span>
-                <h3>Mental Clarity</h3>
-                <p>Practicing in a lavender-themed environment is scientifically proven to lower heart rates by 10%.</p>
+                <span class="material-symbols-outlined">filter_vintage</span>
+                <h3>Aromatherapy</h3>
+                <p>Every Aura session is infused with organic lavender mist to trigger immediate parasympathetic relaxation.</p>
             </div>
             <div class="fact-card">
-                <span class="material-symbols-outlined">bedtime</span>
-                <h3>Restorative Flow</h3>
-                <p>Our "Sunset Sessions" are designed to prepare your body for the deepest sleep of your life.</p>
+                <span class="material-symbols-outlined">flare</span>
+                <h3>Inner Light</h3>
+                <p>We believe yoga is 99% practice and 1% theory. Our virtual studio helps you focus on that 99%.</p>
             </div>
         </div>
     </main>
 
     <!-- VIEW: BOOKING -->
     <main id="booking" class="view">
-        <div style="text-align:center; margin-bottom: 50px;">
-            <h2 style="font-size: 42px;">Reserve Your Space</h2>
-            <p style="color: #888;">Visualise the studio and select your mat.</p>
+        <div style="text-align:center; margin-bottom: 60px;">
+            <h2 style="font-size: 48px; font-weight: 400;">The Studio Floor</h2>
+            <p style="opacity: 0.6; letter-spacing: 1px;">Click a mat to reserve your energy.</p>
         </div>
         
         <div class="studio-floor">
             <div class="instructor-stage"></div>
             <div class="mats-grid" id="matsContainer"></div>
-        </div>
-
-        <div id="bookingAction" style="text-align:center; margin-top: 40px; display:none;">
-            <p id="matSelectionText" style="margin-bottom: 20px; font-style: italic;"></p>
-            <button class="btn-primary" onclick="confirmBooking()">Confirm My Spot</button>
+            
+            <div id="bookingAction" style="margin-top: 60px; display:none; animation: fadeIn 0.5s;">
+                <p id="matSelectionText" style="margin-bottom: 25px; font-family: 'Playfair Display'; font-size: 20px;"></p>
+                <button class="btn-aura" onclick="confirmBooking()">Confirm Reservation</button>
+            </div>
         </div>
     </main>
 
@@ -205,114 +214,130 @@
     <main id="zen" class="view">
         <div id="zenGate">
             <div class="auth-card">
-                <span class="material-symbols-outlined" style="font-size: 48px; color: var(--lavender-deep)">lock_open</span>
-                <h2 style="margin: 20px 0;">Member Access</h2>
-                <input type="password" id="passcode" placeholder="Enter Code">
-                <button class="btn-primary" style="width: 100%;" onclick="unlockZen()">Unlock Library</button>
-                <p style="font-size: 11px; color: #aaa; margin-top: 20px;">HINT: yoga2024</p>
+                <span class="material-symbols-outlined" style="font-size: 54px; color: var(--lavender-deep)">lock_open</span>
+                <h2 style="margin: 25px 0; font-weight: 400;">Member Portal</h2>
+                <input type="password" id="passcode" placeholder="••••">
+                <button class="btn-aura" style="width: 100%;" onclick="unlockZen()">Enter Sanctuary</button>
+                <p style="font-size: 11px; color: #aaa; margin-top: 25px; letter-spacing: 1px;">ACCESS CODE: YOGA2024</p>
             </div>
         </div>
 
-        <div id="zenContent" style="display:none;">
-            <div style="text-align:center;">
-                <h2 style="font-size: 42px;">Sonic Sanctuary</h2>
-                <p>Exclusive frequencies for Aura members.</p>
+        <div id="zenContent" style="display:none; max-width: 800px; margin: 0 auto;">
+            <div style="text-align:center; margin-bottom: 50px;">
+                <h2 style="font-size: 48px; font-weight: 400;">Sonic Sanctuary</h2>
+                <p style="opacity:0.6;">High-fidelity frequencies for your home practice.</p>
             </div>
             
             <div class="track-list">
-                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 'Morning Lavender')">
+                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 'Morning Lavender', 'Ambient Flow')">
                     <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-                    <div><p style="font-weight:500">Morning Lavender</p><small>Ambient Flow • 15:00</small></div>
+                    <div class="track-info">
+                        <p>Morning Lavender</p>
+                        <small>Ambient Flow • 15:00</small>
+                    </div>
                 </div>
-                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', 'Deep Violet Meditation')">
+                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', 'Violet Meditation', 'Deep Sleep')">
                     <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
-                    <div><p style="font-weight:500">Deep Violet Meditation</p><small>Tibetan Bowls • 20:00</small></div>
+                    <div class="track-info">
+                        <p>Violet Meditation</p>
+                        <small>Tibetan Bowls • 20:00</small>
+                    </div>
                 </div>
-            </div>
-
-            <div id="playerBar" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:white; padding:15px 30px; border-radius:100px; box-shadow:0 10px 40px rgba(0,0,0,0.1); display:none; align-items:center; gap:20px; border:1px solid var(--lavender-soft); z-index:1001;">
-                <span id="nowPlaying" style="font-size:14px; font-weight:500; color:var(--lavender-deep)"></span>
-                <audio id="audioElement" controls style="height:30px;"></audio>
+                <div class="track-card" onclick="playTrack('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', 'Aura Breathwork', 'Focus')">
+                    <div class="play-icon"><span class="material-symbols-outlined">play_arrow</span></div>
+                    <div class="track-info">
+                        <p>Aura Breathwork</p>
+                        <small>White Noise • 10:00</small>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- CHAT FEATURE -->
-    <div class="chat-fab" onclick="toggleChat()"><span class="material-symbols-outlined">auto_awesome</span></div>
-    <div class="chat-window" id="chatWindow">
-        <div style="background: var(--lavender-deep); color: white; padding: 25px;">
-            <p style="font-family: 'Playfair Display'; font-size: 20px; font-style: italic;">Aura Assistant</p>
-            <p style="font-size: 11px; opacity: 0.7; letter-spacing: 1px;">ONLINE • READY TO GUIDE</p>
+    <!-- PERSISTENT FLOATING PLAYER -->
+    <div id="globalPlayer" class="zen-controller">
+        <div class="play-icon" style="width:40px; height:40px; background: white; color: var(--lavender-deep);">
+            <span class="material-symbols-outlined" style="font-size: 20px;">graphic_eq</span>
         </div>
-        <div id="chatBody" style="padding: 20px; height: 250px; background: #FAF9FB; overflow-y: auto; font-size: 14px;">
-            <div style="background: white; padding: 12px; border-radius: 15px; border: 1px solid var(--lavender-soft); margin-bottom: 10px;">
-                Namaste. I am here to help you find your flow. Would you like to book a mat or listen to music?
-            </div>
+        <div class="track-info">
+            <p id="playerTrackName">Now Playing</p>
+            <small id="playerTrackCategory">Zen Den Radio</small>
         </div>
-        <div style="padding: 15px; border-top: 1px solid var(--lavender-soft);">
-            <input type="text" placeholder="Ask anything..." style="margin:0; font-size: 14px; padding: 10px; border-radius: 10px;">
-        </div>
+        <audio id="mainAudio" controls style="height: 30px; width: 150px; filter: hue-rotate(240deg);"></audio>
+        <button onclick="closePlayer()" style="background:none; border:none; color:var(--lavender-deep); cursor:pointer;">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+
+    <!-- CHAT FAB -->
+    <div class="chat-fab" onclick="alert('Namaste! Our guide will be with you shortly.')">
+        <span class="material-symbols-outlined">spa</span>
     </div>
 
     <script>
-        // --- View Switcher ---
+        // --- Navigation Logic ---
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
-            window.scrollTo(0, 0);
-            if(viewId === 'booking') initBooking();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if(viewId === 'booking') initStudio();
         }
 
         // --- Booking Logic ---
         let selectedMat = null;
-        function initBooking() {
+        function initStudio() {
             const container = document.getElementById('matsContainer');
             container.innerHTML = '';
             for (let i = 1; i <= 15; i++) {
-                const isTaken = Math.random() < 0.3;
+                const isTaken = Math.random() < 0.35;
                 const mat = document.createElement('div');
                 mat.className = `mat ${isTaken ? 'occupied' : ''}`;
-                mat.innerHTML = `<span class="material-symbols-outlined" style="font-size:18px">${isTaken ? 'person' : 'spa'}</span>`;
+                mat.innerHTML = `<span class="material-symbols-outlined" style="font-size:20px">${isTaken ? 'person' : 'spa'}</span>`;
                 if (!isTaken) {
                     mat.onclick = () => {
                         document.querySelectorAll('.mat').forEach(m => m.classList.remove('selected'));
                         mat.classList.add('selected');
                         selectedMat = i;
                         document.getElementById('bookingAction').style.display = 'block';
-                        document.getElementById('matSelectionText').innerText = `You have selected Mat #${i}`;
+                        document.getElementById('matSelectionText').innerText = `Mat #${i} Selected`;
                     };
                 }
                 container.appendChild(mat);
             }
         }
         function confirmBooking() {
-            alert(`Mat #${selectedMat} is now yours. We have sent a confirmation to your email.`);
+            alert(`Mat #${selectedMat} is reserved for your next session. Breathe deep!`);
             showView('home');
         }
 
-        // --- Zen Den Logic ---
+        // --- Zen Den & Global Player Logic ---
         function unlockZen() {
-            const pass = document.getElementById('passcode').value;
-            if (pass === 'yoga2024') {
+            const pass = document.getElementById('passcode').value.toUpperCase();
+            if (pass === 'YOGA2024') {
                 document.getElementById('zenGate').style.display = 'none';
                 document.getElementById('zenContent').style.display = 'block';
             } else {
-                alert('The sanctuary remains locked. Please check your code.');
+                alert('The sanctuary remains closed. Try the hint.');
             }
         }
-        function playTrack(url, name) {
-            const audio = document.getElementById('audioElement');
-            const bar = document.getElementById('playerBar');
-            document.getElementById('nowPlaying').innerText = name;
-            bar.style.display = 'flex';
+
+        function playTrack(url, name, category) {
+            const player = document.getElementById('globalPlayer');
+            const audio = document.getElementById('mainAudio');
+            
+            document.getElementById('playerTrackName').innerText = name;
+            document.getElementById('playerTrackCategory').innerText = category;
+            
+            player.classList.add('visible');
             audio.src = url;
             audio.play();
         }
 
-        // --- Chat Logic ---
-        function toggleChat() {
-            const win = document.getElementById('chatWindow');
-            win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+        function closePlayer() {
+            const player = document.getElementById('globalPlayer');
+            const audio = document.getElementById('mainAudio');
+            player.classList.remove('visible');
+            audio.pause();
         }
     </script>
 </body>
