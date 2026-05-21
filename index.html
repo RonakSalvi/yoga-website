@@ -67,6 +67,15 @@
         }
         .map-card { border-radius: 30px; overflow: hidden; border: 1px solid var(--secondary); height: 400px; background: #eee; }
 
+        /* --- Music Player Button --- */
+        .music-control {
+            position: fixed; bottom: 30px; right: 30px; z-index: 3000;
+            background: var(--primary); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(150, 123, 182, 0.3); transition: 0.3s;
+        }
+        .music-control:hover { transform: scale(1.1); background: var(--primary-dark); }
+
         /* --- Booking Modal --- */
         .modal {
             display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
@@ -80,7 +89,6 @@
 
         .booking-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .booking-form input, .booking-form select { padding: 12px; border: 1px solid var(--secondary); border-radius: 10px; background: var(--bg-light); outline: none; }
-        .booking-form input:focus { border-color: var(--primary); }
         .submit-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .submit-btn:hover { background: var(--primary-dark); }
 
@@ -93,6 +101,14 @@
     </style>
 </head>
 <body>
+
+    <!-- MUSIC PLAYER -->
+    <audio id="zenAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-control" onclick="toggleMusic()" id="musicBtn">
+        <i class="fa-solid fa-music"></i>
+    </div>
 
     <!-- LANGUAGE OVERLAY -->
     <div id="langOverlay">
@@ -144,25 +160,15 @@
         <section class="section" style="background: var(--secondary);">
             <h2 id="loc-title">Find Us in Stuttgart</h2>
             <div class="location-container">
-                <!-- Weather Widget -->
                 <div class="weather-card">
                     <h3 id="weather-label" style="margin-bottom: 15px; color: var(--primary-dark);">Current Weather</h3>
-                    <a class="weatherwidget-io" href="https://forecast7.com/en/48p789p18/stuttgart/" data-label_1="STUTTGART" data-label_2="WEATHER" data-font="Poppins" data-icons="Climacons Animated" data-mode="Current" data-theme="pure" data-basecolor="" data-accent="" data-textcolor="#967BB6" >STUTTGART WEATHER</a>
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/48p789p18/stuttgart/" data-label_1="STUTTGART" data-label_2="WEATHER" data-font="Poppins" data-icons="Climacons Animated" data-mode="Current" data-theme="pure" data-textcolor="#967BB6" >STUTTGART WEATHER</a>
                     <script>
                     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                     </script>
                 </div>
-                <!-- Google Map (FIXED) -->
                 <div class="map-card">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db34c1ad8fd3%3A0x79d5c11c7791cfe4!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sde!4v1715852543210!5m2!1sen!2sde" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m1.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db34c1ad8fd3%3A0x79d5c11c7791cfe4!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sde!4v1715852543210!5m2!1sen!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
@@ -182,11 +188,9 @@
                     <form class="booking-form" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
                         <input type="hidden" name="mat" id="hiddenMat">
                         <input type="hidden" name="class" id="hiddenClass">
-                        
                         <input type="text" name="name" placeholder="Full Name" required>
                         <input type="email" name="email" placeholder="Email Address" required>
                         <input type="date" id="bookingDate" name="date" required>
-                        
                         <select name="batch" required>
                             <option value="Morning">Morning (6:30 AM)</option>
                             <option value="Evening">Evening (6:30 PM)</option>
@@ -203,6 +207,22 @@
     </div>
 
     <script>
+        // Music Logic
+        const audio = document.getElementById('zenAudio');
+        const musicBtn = document.getElementById('musicBtn');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+            } else {
+                audio.play();
+                musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        }
+
         const translations = {
             en: {
                 heroTitle: "Serenity in Stuttgart.", heroSub: "Your journey to mindfulness begins here.",
@@ -248,7 +268,6 @@
             document.getElementById('mainContent').style.opacity = '1';
         }
 
-        // Generate 12 Mats
         const grid = document.getElementById('matGrid');
         for (let i = 1; i <= 12; i++) {
             const mat = document.createElement('div');
@@ -276,8 +295,6 @@
         }
 
         function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
-        
-        // Set min date to today
         document.getElementById('bookingDate').setAttribute('min', new Date().toISOString().split('T')[0]);
     </script>
 </body>
