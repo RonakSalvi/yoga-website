@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Yoga | Find Your Inner Light</title>
+    <title>Aura Yoga | Book Your Session</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
             --secondary: #E9E4D9; /* Soft Cream */
             --dark: #2C3E50; /* Slate */
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.8);
+            --glass: rgba(255, 255, 255, 0.85);
         }
 
         * {
@@ -45,7 +45,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 25px 10%;
+            padding: 20px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -75,21 +75,16 @@
         nav ul li a {
             text-decoration: none;
             color: var(--dark);
-            font-weight: 400;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-
         /* --- Hero Section --- */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
                         url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -100,23 +95,9 @@
             color: var(--white);
         }
 
-        .hero-content {
-            max-width: 800px;
-            padding: 20px;
-            animation: fadeIn 2s ease-in;
-        }
-
         .hero-content h1 {
             font-size: 4.5rem;
             margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            font-weight: 300;
-            letter-spacing: 1px;
         }
 
         .btn {
@@ -128,6 +109,8 @@
             transition: 0.4s;
             display: inline-block;
             border: 1px solid var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn:hover {
@@ -137,27 +120,95 @@
             transform: translateY(-3px);
         }
 
-        /* --- Features Section --- */
-        .section {
-            padding: 100px 10%;
+        /* --- Modal / Form Styling --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .booking-form h2 {
+            margin-bottom: 10px;
+            color: var(--primary);
             text-align: center;
         }
 
-        .section-title {
-            font-size: 3rem;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
+        .booking-form label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: -15px;
         }
 
-        .section-title::after {
-            content: '';
-            width: 50%;
-            height: 2px;
+        .booking-form input, .booking-form select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        .booking-form input:focus, .booking-form select:focus {
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
             background: var(--primary);
-            position: absolute;
-            bottom: -10px;
-            left: 25%;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--dark);
+        }
+
+        /* --- Classes Section --- */
+        .section {
+            padding: 100px 10%;
+            text-align: center;
         }
 
         .grid {
@@ -169,89 +220,33 @@
 
         .card {
             background: var(--white);
-            padding: 50px 30px;
+            padding: 40px;
             border-radius: 20px;
             transition: 0.4s;
-            border: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer;
         }
 
         .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
         }
 
         .card i {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
             margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        /* --- About Section --- */
-        .about {
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        .about-image {
-            flex: 1;
-            min-width: 400px;
-            height: 600px;
-            background: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .about-text {
-            flex: 1;
-            padding: 80px 10%;
-            min-width: 400px;
         }
 
         /* --- Footer --- */
         footer {
             background: var(--dark);
             color: var(--secondary);
-            padding: 60px 10% 20px;
+            padding: 40px 10%;
             text-align: center;
         }
 
-        .footer-links {
-            margin-bottom: 30px;
-        }
-
-        .footer-links a {
-            color: var(--secondary);
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        .copyright {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3rem; }
-            nav { padding: 20px 5%; }
+            .hero-content h1 { font-size: 2.5rem; }
             nav ul { display: none; }
         }
     </style>
@@ -262,7 +257,6 @@
         <a href="#" class="logo">AURA YOGA</a>
         <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">Our Story</a></li>
             <li><a href="#classes">Classes</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -270,55 +264,96 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Embrace Your Journey.</h1>
-            <p>A sanctuary for the soul. Discover balance, strength, and inner stillness.</p>
-            <a href="#classes" class="btn">Begin Your Practice</a>
+            <h1>Find Your Balance.</h1>
+            <p>Join our community and discover the peace within.</p>
+            <!-- Clicking this opens the form -->
+            <button class="btn" onclick="openModal()">Begin Your Practice</button>
         </div>
     </section>
 
     <section id="classes" class="section">
-        <h2 class="section-title">Mindful Practices</h2>
+        <h2 style="font-size: 2.5rem;">Our Mindful Sessions</h2>
+        <p>Click a class to book your spot</p>
         <div class="grid">
-            <div class="card">
+            <div class="card" onclick="openModal()">
                 <i class="fa-solid fa-leaf"></i>
                 <h3>Hatha Flow</h3>
-                <p>Traditional postures held with intention to align your body and spirit.</p>
+                <p>Perfect for beginners. Focus on alignment and breath.</p>
             </div>
-            <div class="card">
+            <div class="card" onclick="openModal()">
                 <i class="fa-solid fa-wind"></i>
                 <h3>Vinyasa</h3>
-                <p>A fluid sequence of movement synchronized with the rhythm of your breath.</p>
+                <p>A dynamic, flowing practice to build heat and strength.</p>
             </div>
-            <div class="card">
+            <div class="card" onclick="openModal()">
                 <i class="fa-solid fa-moon"></i>
                 <h3>Yin Yoga</h3>
-                <p>Slow-paced meditative stretching focusing on deep connective tissues.</p>
+                <p>Deeply restorative poses for flexibility and calm.</p>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="about-image"></div>
-        <div class="about-text">
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">The Essence of Aura</h2>
-            <p>We believe that yoga is more than just movement; it is a return to oneself. In our studio, we provide the space for you to disconnect from the noise of the world and reconnect with your inner light.</p>
-            <br>
-            <p>Whether you are a Siemens professional looking for stress relief or a lifelong yogi, our doors are open to everyone.</p>
+    <!-- THE MODAL FORM -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <form class="booking-form" id="yogaForm">
+                <h2>Book Your Batch</h2>
+                
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your name" required>
+
+                <label>Select Date</label>
+                <input type="date" id="bookingDate" required>
+
+                <label>Choose Batch</label>
+                <select required>
+                    <option value="" disabled selected>Select a time slot</option>
+                    <option value="morning">Morning (6:00 AM - 7:30 AM)</option>
+                    <option value="noon">Mid-Day (12:00 PM - 1:30 PM)</option>
+                    <option value="evening">Evening (5:30 PM - 7:00 PM)</option>
+                    <option value="night">Night (8:00 PM - 9:30 PM)</option>
+                </select>
+
+                <button type="submit" class="submit-btn">Confirm Booking</button>
+            </form>
         </div>
-    </section>
+    </div>
 
     <footer id="contact">
-        <div class="footer-links">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
-        </div>
-        <p>123 Serenity Way, Wellness City</p>
-        <p>hello@aurayoga.com</p>
-        <div class="copyright">
-            &copy; 2024 Aura Yoga Studio. Designed for Peace.
-        </div>
+        <p>&copy; 2024 Aura Yoga Studio. Namaste.</p>
     </footer>
+
+    <script>
+        // Function to open the modal
+        function openModal() {
+            document.getElementById("bookingModal").style.display = "flex";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("bookingModal").style.display = "none";
+        }
+
+        // Close modal if user clicks outside of the white box
+        window.onclick = function(event) {
+            let modal = document.getElementById("bookingModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Handle Form Submission
+        document.getElementById("yogaForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Namaste! Your booking request has been received. See you on the mat!");
+            closeModal();
+        });
+
+        // Set minimum date to today so users can't book in the past
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('bookingDate').setAttribute('min', today);
+    </script>
 
 </body>
 </html>
