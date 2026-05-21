@@ -4,8 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZenFlow Yoga | Find Your Inner Peace</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        header {
+            background: #fff;
+            padding: 20px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #8fb9a8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #8fb9a8;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 35px;
+            background: #8fb9a8;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: #7aa896;
+            transform: scale(1.05);
+        }
+
+        /* Classes Section */
+        .classes {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .classes h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .class-card {
+            padding: 40px;
+            background: #fdfdfd;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .class-card h3 {
+            color: #8fb9a8;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* Simplified for mobile */
+        }
+    </style>
 </head>
 <body>
 
@@ -34,20 +189,21 @@
         <div class="class-grid">
             <div class="class-card">
                 <h3>Hatha Yoga</h3>
-                <p>Focus on physical postures and breathing techniques to build strength.</p>
+                <p>Focus on physical postures and breathing techniques to build strength and flexibility.</p>
             </div>
             <div class="class-card">
                 <h3>Vinyasa Flow</h3>
-                <p>A dynamic practice linking breath with movement for a fluid experience.</p>
+                <p>A dynamic practice linking breath with movement for a fluid, energizing experience.</p>
             </div>
             <div class="class-card">
                 <h3>Restorative</h3>
-                <p>Deep relaxation using props to support the body in gentle poses.</p>
+                <p>Deep relaxation using props to support the body in gentle, long-held poses.</p>
             </div>
         </div>
     </section>
 
-    <footer>
+    <footer id="contact">
+        <p>Contact us: namaste@zenflowyoga.com</p>
         <p>&copy; 2024 ZenFlow Yoga. Created with peace and clarity.</p>
     </footer>
 
