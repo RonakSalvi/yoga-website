@@ -1,0 +1,385 @@
+/* General Body & Typography */
+:root {
+    --primary-color: #6a0572; /* A deep, calming purple */
+    --secondary-color: #e0b0ff; /* Lighter purple for accents */
+    --text-dark: #333;
+    --text-light: #555;
+    --bg-light: #f8f8f8;
+    --bg-white: #ffffff;
+    --border-color: #eee;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: var(--text-light);
+    background-color: var(--bg-white);
+    scroll-behavior: smooth; /* For smooth scrolling to sections */
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.6em; }
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header (Hero Section) */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-bg.jpg') no-repeat center center/cover; /* Add a calming background image */
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Make it take up more vertical space */
+}
+
+.hero .container {
+    max-width: 800px;
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: 3.5em;
+    margin-bottom: 10px;
+}
+
+.hero .tagline {
+    font-size: 1.4em;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.logo {
+    max-width: 150px; /* Adjust as needed */
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%; /* If it's a circular logo/headshot */
+    border: 3px solid rgba(255,255,255,0.7);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #c780ff; /* Slightly darker secondary */
+    transform: translateY(-2px);
+}
+
+/* Sections */
+.section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.section.bg-light {
+    background-color: var(--bg-light);
+}
+
+.section h2 {
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    flex-direction: column; /* Stack on small screens */
+    align-items: center;
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.headshot {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary-color);
+    flex-shrink: 0; /* Prevent shrinking on larger screens */
+}
+
+.about-content p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-item {
+    background-color: var(--bg-white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.service-item h3 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.service-item h3 .fas {
+    color: var(--secondary-color);
+    font-size: 1.5em;
+}
+
+.services-cta {
+    margin-top: 50px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--primary-color);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* How It Works Steps */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.step-item {
+    background-color: var(--bg-white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    position: relative;
+    text-align: left;
+    padding-left: 70px; /* Space for the number */
+}
+
+.step-number {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.step-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+/* Testimonials */
+.testimonial-item {
+    background-color: var(--bg-white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin: 30px auto;
+    max-width: 700px;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.1em;
+    color: var(--text-dark);
+}
+
+.testimonial-item p {
+    margin-bottom: 15px;
+}
+
+.testimonial-item cite {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+/* Contact Section */
+.contact-intro {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: var(--text-dark);
+}
+
+.contact-info p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.contact-info a {
+    font-weight: 600;
+}
+
+.contact-info .fas {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+
+.social-links {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.social-links a {
+    display: inline-block;
+    font-size: 2.2em;
+    margin: 0 15px;
+    color: var(--primary-color);
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: var(--text-light);
+}
+
+/* --- Responsive Adjustments --- */
+
+/* Tablet (e.g., 768px and up) */
+@media (min-width: 768px) {
+    .hero {
+        padding: 120px 20px;
+        min-height: 70vh;
+    }
+
+    .hero h1 {
+        font-size: 4.5em;
+    }
+
+    .hero .tagline {
+        font-size: 1.6em;
+    }
+
+    .about-content {
+        flex-direction: row; /* Side-by-side on larger screens */
+        text-align: left;
+    }
+
+    .headshot {
+        margin-right: 30px; /* Space between image and text */
+    }
+
+    .service-item, .step-item {
+        text-align: left; /* Align text left in grid items */
+        padding-left: 30px; /* Reset for service items */
+    }
+
+    .service-item h3 {
+        justify-content: flex-start; /* Align icon and text left */
+    }
+
+    .step-number {
+        left: 20px;
+    }
+}
+
+/* Laptop/Desktop (e.g., 1024px and up) */
+@media (min-width: 1024px) {
+    h1 { font-size: 3.5em; }
+    h2 { font-size: 2.5em; }
+    h3 { font-size: 1.8em; }
+
+    .hero {
+        padding: 150px 20px;
+        min-height: 80vh;
+    }
+
+    .hero h1 {
+        font-size: 5.5em;
+    }
+
+    .hero .tagline {
+        font-size: 1.8em;
+    }
+
+    .section {
+        padding: 80px 0;
+    }
+
+    .about-content {
+        gap: 50px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+    }
+
+    .steps-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
+    }
+}
