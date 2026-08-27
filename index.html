@@ -178,16 +178,24 @@
 
         // --- 1. Fetch Real-Time Data ---
         async function fetchBookedMats() {
+            console.log("7. fetchBookedMats() called."); // ADDED FOR DEBUGGING
             document.getElementById('loadingText').innerText = "Checking availability...";
             try {
+                console.log("8. Attempting to fetch from API_URL:", API_URL); // ADDED FOR DEBUGGING
                 const response = await fetch(API_URL);
+                console.log("9. Fetch response received:", response); // ADDED FOR DEBUGGING
+                if (!response.ok) {
+                    console.error("10. Fetch response not OK:", response.status, response.statusText); // ADDED FOR DEBUGGING
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.json();
-                // We extract the mat_id from each row in the Google Sheet
+                console.log("11. Data parsed from JSON:", data); // ADDED FOR DEBUGGING
                 takenMats = data.map(entry => parseInt(entry.mat_id));
+                console.log("12. Taken mats identified:", takenMats); // ADDED FOR DEBUGGING
                 renderMats();
                 document.getElementById('loadingText').innerText = "Studio Synced ✓";
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("13. Error fetching data:", error); // ADDED FOR DEBUGGING
                 document.getElementById('loadingText').innerText = "Offline Mode (Local)";
                 renderMats();
             }
@@ -209,6 +217,7 @@
         // --- 2. Handle Booking (Push to Cloud) ---
         async function handleFormSubmit(e) {
             e.preventDefault();
+            console.log("16. handleFormSubmit() called."); // ADDED FOR DEBUGGING
             const btn = document.getElementById('form-btn');
             btn.disabled = true;
             btn.innerText = "Reserving...";
@@ -222,60 +231,90 @@
                     date: document.getElementById('bookingDate').value
                 }]
             };
+            console.log("17. Booking data prepared:", bookingData); // ADDED FOR DEBUGGING
 
             try {
+                console.log("18. Attempting to POST to API_URL:", API_URL); // ADDED FOR DEBUGGING
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(bookingData)
                 });
+                console.log("19. POST response received:", response); // ADDED FOR DEBUGGING
 
                 if (response.ok) {
+                    console.log("20. POST request successful!"); // ADDED FOR DEBUGGING
                     alert("Namaste! Mat #" + selectedMat + " is now officially reserved for you.");
                     closeModal();
                     fetchBookedMats(); // Refresh the grid for everyone
+                } else {
+                    console.error("20. POST request failed:", response.status, response.statusText); // ADDED FOR DEBUGGING
+                    alert("Booking failed. Server responded with: " + response.status + " " + response.statusText);
                 }
             } catch (error) {
+                console.error("21. Error during POST request:", error); // ADDED FOR DEBUGGING
                 alert("Connection error. Please try again.");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "Confirm & Reserve";
+                console.log("22. Form submission process finished."); // ADDED FOR DEBUGGING
             }
         }
 
         // --- UI Logic ---
         function checkPreferences() {
+            console.log("1. checkPreferences() called on page load."); // ADDED FOR DEBUGGING
             const savedLang = localStorage.getItem('auraLang');
-            if (savedLang) setLanguage(savedLang);
+            if (savedLang) {
+                console.log("2. Saved language found:", savedLang); // ADDED FOR DEBUGGING
+                setLanguage(savedLang);
+            } else {
+                console.log("2. No saved language found, language overlay should be visible."); // ADDED FOR DEBUGGING
+            }
         }
 
         function setLanguage(lang) {
+            console.log("3. setLanguage() called with:", lang); // ADDED FOR DEBUGGING
             localStorage.setItem('auraLang', lang);
             document.getElementById('langOverlay').style.display = 'none';
             document.getElementById('mainContent').style.opacity = '1';
             document.getElementById('currentLangTag').innerText = lang;
+            console.log("4. Language set, overlay hidden, main content visible."); // ADDED FOR DEBUGGING
         }
 
         function openBooking(cls) {
+            console.log("5. openBooking() called for class:", cls); // ADDED FOR DEBUGGING
             selectedClass = cls;
             document.getElementById('bookingModal').style.display = 'flex';
             document.getElementById('step1').style.display = 'block';
             document.getElementById('step2').style.display = 'none';
             fetchBookedMats(); // Fetch fresh data every time modal opens
+            console.log("6. Booking modal opened, calling fetchBookedMats()."); // ADDED FOR DEBUGGING
         }
 
         function selectMat(num) {
+            console.log("14. Mat selected:", num); // ADDED FOR DEBUGGING
             selectedMat = num;
             document.getElementById('selection-summary').innerText = selectedClass + " | Mat #" + num;
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
+            console.log("15. Moving to step 2 (registration form)."); // ADDED FOR DEBUGGING
         }
 
-        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+        function closeModal() { 
+            document.getElementById('bookingModal').style.display = 'none'; 
+            console.log("Modal closed."); // ADDED FOR DEBUGGING
+        }
         
         const audio = document.getElementById('zenAudio');
         function toggleMusic() {
-            if (audio.paused) { audio.play(); } else { audio.pause(); }
+            if (audio.paused) { 
+                audio.play(); 
+                console.log("Music started."); // ADDED FOR DEBUGGING
+            } else { 
+                audio.pause(); 
+                console.log("Music paused."); // ADDED FOR DEBUGGING
+            }
         }
     </script>
 </body>
