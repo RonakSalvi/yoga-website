@@ -163,6 +163,7 @@
                     <form id="yogaForm" class="booking-form" onsubmit="handleFormSubmit(event)">
                         <input type="text" name="name" id="userName" placeholder="Full Name" required>
                         <input type="email" name="email" id="userEmail" placeholder="Email Address" required>
+                        <input type="tel" name="phone" id="userPhone" placeholder="Phone Number (optional)">
                         <input type="date" id="bookingDate" required>
                         <button type="submit" class="submit-btn" id="form-btn">Confirm & Reserve</button>
                     </form>
@@ -248,6 +249,7 @@
                     mat_id: selectedMat,
                     name: document.getElementById('userName').value,
                     email: document.getElementById('userEmail').value,
+                    phone: document.getElementById('userPhone').value, // Included phone number
                     class: selectedClass,
                     date: document.getElementById('bookingDate').value,
                     token: bookingToken // Add the generated token here
