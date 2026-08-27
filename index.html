@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Yog Shala | Stuttgart Sanctuary</title>
+    <title>Yog Shala | Stuttgart Sanctuary - Yoga Studio & Classes</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes. Book your mat and start your journey to peace and well-being today.">
+    <meta name="keywords" content="yoga Stuttgart, Yog Shala, Hatha Flow, Vinyasa, yoga classes, mindfulness, meditation, yoga studio, Stuttgart sanctuary, well-being, health">
+    <meta name="author" content="Yog Shala Studio">
+    <link rel="canonical" href="https://www.yourwebsite.com/index.html"> <!-- IMPORTANT: Replace with your actual domain -->
+
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="Yog Shala | Stuttgart Sanctuary - Yoga Studio & Classes">
+    <meta property="og:description" content="Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes. Book your mat and start your journey to peace and well-being today.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourwebsite.com/index.html"> <!-- IMPORTANT: Replace with your actual domain -->
+    <meta property="og:image" content="https://www.yourwebsite.com/images/yog-shala-share-image.jpg"> <!-- IMPORTANT: Create and link a relevant image for sharing -->
+    <meta property="og:image:alt" content="Yog Shala studio interior with yoga mats and peaceful ambiance">
+    <meta property="og:locale" content="de_DE"> <!-- Adjust if your primary audience is different -->
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yourtwitterhandle"> <!-- Optional: Your Twitter handle -->
+    <meta name="twitter:creator" content="@yourtwitterhandle"> <!-- Optional: Your Twitter handle -->
+    <meta name="twitter:title" content="Yog Shala | Stuttgart Sanctuary - Yoga Studio & Classes">
+    <meta name="twitter:description" content="Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes. Book your mat and start your journey to peace and well-being today.">
+    <meta name="twitter:image" content="https://www.yourwebsite.com/images/yog-shala-share-image.jpg"> <!-- IMPORTANT: Use the same image as og:image -->
+
     <!-- Google Fonts: Added 'Gotu' for Sanskrit text -->
     <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -92,6 +115,54 @@
 
         footer { padding: 40px; background: var(--dark); color: var(--secondary); text-align: center; }
     </style>
+
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "YogaStudio",
+      "name": "Yog Shala",
+      "description": "Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes.",
+      "url": "https://www.yourwebsite.com/", <!-- IMPORTANT: Replace with your actual domain -->
+      "image": "https://www.yourwebsite.com/images/yog-shala-logo.png", <!-- IMPORTANT: Link to your logo -->
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Your Street Address", <!-- IMPORTANT: Your studio's street address -->
+        "addressLocality": "Stuttgart",
+        "addressRegion": "BW",
+        "postalCode": "Your Postal Code", <!-- IMPORTANT: Your studio's postal code -->
+        "addressCountry": "DE"
+      },
+      "telephone": "+49-Your-Phone-Number", <!-- IMPORTANT: Your studio's phone number -->
+      "email": "info@yourwebsite.com", <!-- IMPORTANT: Your studio's email -->
+      "openingHours": [
+        "Mo-Fr 09:00-21:00",
+        "Sa-Su 10:00-18:00"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Yoga Classes",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hatha Flow Yoga Class",
+              "description": "Gentle movement and breathwork for all levels."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Vinyasa Yoga Class",
+              "description": "Energetic flow connecting breath to movement."
+            }
+          }
+        ]
+      }
+    }
+    </script>
 </head>
 <body onload="checkPreferences()">
 
@@ -163,7 +234,6 @@
                     <form id="yogaForm" class="booking-form" onsubmit="handleFormSubmit(event)">
                         <input type="text" name="name" id="userName" placeholder="Full Name" required>
                         <input type="email" name="email" id="userEmail" placeholder="Email Address" required>
-                        <!-- ADDED: Phone Number Input -->
                         <input type="tel" name="phone" id="userPhone" placeholder="Phone Number (optional)"> 
                         <input type="date" id="bookingDate" required>
                         <button type="submit" class="submit-btn" id="form-btn">Confirm & Reserve</button>
