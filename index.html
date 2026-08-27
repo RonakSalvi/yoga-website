@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Yoga | Stuttgart Sanctuary</title>
+    <title> Yog Shala | Stuttgart Sanctuary</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Added 'Gotu' for Sanskrit text -->
+    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
@@ -39,6 +40,13 @@
         .lang-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
         .lang-btn { padding: 12px 25px; border: 2px solid var(--primary); border-radius: 50px; background: transparent; cursor: pointer; color: var(--primary); font-weight: 600; transition: 0.3s; }
         .lang-btn:hover { background: var(--primary); color: white; }
+
+        /* Apply Sanskrit font to Hindi and Marathi buttons */
+        .lang-btn[onclick="setLanguage('hi')"],
+        .lang-btn[onclick="setLanguage('mr')"] {
+            font-family: 'Gotu', sans-serif; /* Use the chosen Sanskrit font */
+            font-size: 1.2rem; /* Adjust as needed for readability */
+        }
 
         #mainContent { opacity: 0; transition: 1s ease; }
 
@@ -112,7 +120,7 @@
 
     <div id="mainContent">
         <nav>
-            <a href="#" class="logo">AURA YOGA</a>
+            <a href="#" class="logo">YOG SHALA</a>
             <div id="currentLangTag" style="font-size: 0.7rem; color: var(--primary-dark); font-weight: 600; text-transform: uppercase;"></div>
         </nav>
 
@@ -163,7 +171,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2024 Aura Yoga Studio Stuttgart. Namaste.</p>
+            <p>&copy; 2024 Yog Shala Studio Stuttgart. Namaste.</p>
         </footer>
     </div>
 
@@ -175,6 +183,14 @@
         let takenMats = [];
         let selectedMat = null;
         let selectedClass = "";
+
+        // Function to generate a UUID (Universally Unique Identifier)
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
 
         // --- 1. Fetch Real-Time Data ---
         async function fetchBookedMats() {
@@ -190,6 +206,7 @@
                 }
                 const data = await response.json();
                 console.log("11. Data parsed from JSON:", data); // ADDED FOR DEBUGGING
+                // Ensure 'token' column exists in your Google Sheet for cancellation to work
                 takenMats = data.map(entry => parseInt(entry.mat_id));
                 console.log("12. Taken mats identified:", takenMats); // ADDED FOR DEBUGGING
                 renderMats();
@@ -222,13 +239,18 @@
             btn.disabled = true;
             btn.innerText = "Reserving...";
 
+            const bookingToken = generateUUID(); // Generate unique token
+            // Construct cancellation link using the current origin and the new cancel.html page
+            const cancellationLink = `${window.location.origin}/cancel.html?token=${bookingToken}`; 
+
             const bookingData = {
                 data: [{
                     mat_id: selectedMat,
                     name: document.getElementById('userName').value,
                     email: document.getElementById('userEmail').value,
                     class: selectedClass,
-                    date: document.getElementById('bookingDate').value
+                    date: document.getElementById('bookingDate').value,
+                    token: bookingToken // Add the generated token here
                 }]
             };
             console.log("17. Booking data prepared:", bookingData); // ADDED FOR DEBUGGING
@@ -244,7 +266,11 @@
 
                 if (response.ok) {
                     console.log("20. POST request successful!"); // ADDED FOR DEBUGGING
-                    alert("Namaste! Mat #" + selectedMat + " is now officially reserved for you.");
+                    alert(
+                        "Namaste! Mat #" + selectedMat + " is now officially reserved for you." +
+                        "\n\nTo cancel your booking, please use this link (keep it safe!):" +
+                        "\n" + cancellationLink
+                    );
                     closeModal();
                     fetchBookedMats(); // Refresh the grid for everyone
                 } else {
@@ -255,11 +281,11 @@
                 console.error("21. Error during POST request:", error); // ADDED FOR DEBUGGING
                 alert("Connection error. Please try again.");
             } finally {
-                btn.disabled = false;
-                btn.innerText = "Confirm & Reserve";
-                console.log("22. Form submission process finished."); // ADDED FOR DEBUGGING
+                    btn.disabled = false;
+                    btn.innerText = "Confirm & Reserve";
+                    console.log("22. Form submission process finished."); // ADDED FOR DEBUGGING
+                }
             }
-        }
 
         // --- UI Logic ---
         function checkPreferences() {
