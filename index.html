@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yog Shala | Stuttgart Sanctuary - Yoga Studio & Classes</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="https://www.yourwebsite.com/favicon.ico" type="image/x-icon"> <!-- IMPORTANT: Replace with your actual favicon path -->
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes. Book your mat and start your journey to peace and well-being today.">
     <meta name="keywords" content="yoga Stuttgart, Yog Shala, Hatha Flow, Vinyasa, yoga classes, mindfulness, meditation, yoga studio, Stuttgart sanctuary, well-being, health">
@@ -53,6 +56,50 @@
             border-bottom: 1px solid var(--secondary);
         }
         .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none; /* Hidden by default on desktop */
+            flex-direction: column;
+            cursor: pointer;
+            span {
+                height: 3px;
+                width: 25px;
+                background: var(--dark);
+                margin: 4px 0;
+                transition: 0.3s;
+            }
+        }
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* Adjust based on nav height */
+                left: 0;
+                width: 100%;
+                background: rgba(255,255,255,0.95);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid var(--secondary);
+                padding: 20px 10%;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
 
         /* --- Language Overlay --- */
         #langOverlay {
@@ -88,9 +135,32 @@
         .card { background: var(--white); padding: 40px; border-radius: 30px; border: 1px solid var(--secondary); cursor: pointer; transition: 0.3s; }
         .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(150, 123, 182, 0.1); }
 
+        /* --- About Section --- */
+        .about-section {
+            background-color: var(--secondary);
+            padding: 80px 10%;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        .about-content p {
+            margin-bottom: 20px;
+        }
+
         /* --- Upcoming Event Section --- */
         .event-section {
-            background-color: var(--primary); /* Use your primary color for emphasis */
+            background-color: var(--primary); 
             color: var(--white);
             padding: 60px 10%;
             text-align: center;
@@ -101,7 +171,7 @@
             margin-bottom: 20px;
         }
         .event-card {
-            background: rgba(255, 255, 255, 0.15); /* Slightly transparent white */
+            background: rgba(255, 255, 255, 0.15); 
             border-radius: 20px;
             padding: 30px;
             max-width: 700px;
@@ -120,12 +190,12 @@
         }
         .event-card .event-date {
             font-weight: 600;
-            color: var(--secondary); /* Light color for date */
+            color: var(--secondary); 
             margin-bottom: 10px;
             display: block;
         }
         .event-card .event-btn {
-            background: var(--secondary); /* Use a contrasting color for the button */
+            background: var(--secondary); 
             color: var(--primary-dark);
             border: none;
             padding: 12px 30px;
@@ -133,7 +203,7 @@
             cursor: pointer;
             font-weight: 600;
             transition: 0.3s;
-            text-decoration: none; /* For anchor tag */
+            text-decoration: none; 
             display: inline-block;
             margin-top: 15px;
         }
@@ -201,6 +271,174 @@
             line-height: 1.6;
         }
 
+        /* --- Testimonials Section --- */
+        .testimonials-section {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 80px 10%;
+            text-align: center;
+        }
+        .testimonials-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: left;
+            position: relative;
+        }
+        .testimonial-card i.fa-quote-left {
+            font-size: 2rem;
+            color: var(--secondary);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.5;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            padding-top: 20px; /* Space for quote icon */
+        }
+        .testimonial-card .author {
+            font-weight: 600;
+            color: var(--secondary);
+            display: block;
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-section {
+            padding: 80px 10%;
+            text-align: center;
+            background-color: var(--bg-light);
+        }
+        .gallery-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-dark);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.03);
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 80px 10%;
+            text-align: center;
+        }
+        .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .contact-info, .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        .contact-info p i {
+            margin-right: 15px;
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
+        .contact-map {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .contact-map iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            outline: none;
+            font-size: 1rem;
+        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .contact-form button {
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+        .contact-form button:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
         /* --- Music Player --- */
         .music-control {
             position: fixed; bottom: 30px; right: 30px; z-index: 3000;
@@ -223,10 +461,86 @@
 
         .booking-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .booking-form input, .booking-form select { padding: 12px; border: 1px solid var(--secondary); border-radius: 10px; background: var(--bg-light); outline: none; }
-        .submit-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .submit-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.3s; position: relative; }
         .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .submit-btn .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            -webkit-animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { -webkit-transform: rotate(360deg); }
+        }
+        @-webkit-keyframes spin {
+            to { -webkit-transform: rotate(360deg); }
+        }
+        .form-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
 
         footer { padding: 40px; background: var(--dark); color: var(--secondary); text-align: center; }
+
+        /* --- Cookie Consent Banner --- */
+        #cookieConsentBanner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(45, 36, 56, 0.95); /* Dark background */
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 4000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+        }
+        #cookieConsentBanner p {
+            margin: 0;
+            flex-grow: 1;
+            text-align: center;
+        }
+        #cookieConsentBanner button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        #cookieConsentBanner button:hover {
+            background-color: var(--primary-dark);
+        }
+        #cookieConsentBanner a {
+            color: var(--secondary);
+            text-decoration: underline;
+            margin-left: 5px;
+        }
     </style>
 
     <!-- Schema.org Structured Data (JSON-LD) -->
@@ -235,7 +549,7 @@
       "@context": "https://schema.org",
       "@type": "YogaStudio",
       "name": "Yog Shala",
-      "description": "Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes.",
+      "description": "Yog Shala is a serene yoga studio in Stuttgart offering Hatha Flow, Vinyasa, and mindfulness classes. Book your mat and start your journey to peace and well-being today.",
       "url": "https://www.yourwebsite.com/", <!-- IMPORTANT: Replace with your actual domain -->
       "image": "https://www.yourwebsite.com/images/yog-shala-logo.png", <!-- IMPORTANT: Link to your logo -->
       "address": {
@@ -314,11 +628,18 @@
           "url": "https://www.yourwebsite.com/trainers/anjali-sharma.html" <!-- Optional: Link to a dedicated trainer page -->
         }
         // Add more trainers here if needed
-      ]
+      ],
+      "hasMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.908298717904!2d9.17699171595159!3d48.77584507928929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db3d4d3e8e7b%3A0x1d4a0b3f8e5f0b3!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sde!4v1678912345678!5m2!1sen!2sde" <!-- IMPORTANT: Replace with your actual Google Maps embed URL -->
     }
     </script>
 </head>
 <body onload="checkPreferences()">
+
+    <!-- COOKIE CONSENT BANNER -->
+    <div id="cookieConsentBanner">
+        <p>We use cookies to ensure you get the best experience on our website. By continuing to use our site, you agree to our <a href="https://www.yourwebsite.com/privacy-policy.html" target="_blank">Privacy Policy</a>.</p>
+        <button onclick="acceptCookies()">Got it!</button>
+    </div>
 
     <!-- MUSIC PLAYER -->
     <audio id="zenAudio" loop>
@@ -346,17 +667,42 @@
     <div id="mainContent">
         <nav>
             <a href="#" class="logo">YOG SHALA</a>
-            <div id="currentLangTag" style="font-size: 0.7rem; color: var(--primary-dark); font-weight: 600; text-transform: uppercase;"></div>
+            <div class="hamburger" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#sessions">Classes</a></li>
+                <li><a href="#event">Event</a></li>
+                <li><a href="#trainers">Trainers</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div id="currentLangTag" style="font-size: 0.7rem; color: var(--primary-dark); font-weight: 600; text-transform: uppercase; margin-left: auto;"></div>
         </nav>
 
-        <section class="hero">
+        <section class="hero" id="hero">
             <div>
                 <h1 id="hero-title">Serenity in Stuttgart.</h1>
                 <p id="hero-sub">Your journey to mindfulness begins here.</p>
             </div>
         </section>
 
-        <section class="section">
+        <!-- NEW: ABOUT SECTION -->
+        <section class="about-section" id="about">
+            <h2>Our Philosophy</h2>
+            <div class="about-content">
+                <p>Welcome to Yog Shala, your sanctuary for peace and well-being in the heart of Stuttgart. We believe that yoga is more than just a physical practice; it's a journey of self-discovery, mindfulness, and connection.</p>
+                <p>Our studio offers a warm and inclusive environment where practitioners of all levels can explore the transformative power of yoga. From invigorating Vinyasa flows to calming Hatha sessions, our experienced instructors guide you through practices designed to harmonize your body, mind, and spirit.</p>
+                <p>Join our community and embark on a path towards greater strength, flexibility, and inner tranquility. Namaste.</p>
+            </div>
+        </section>
+
+        <section class="section" id="sessions">
             <h2 id="class-heading">Our Sessions</h2>
             <div class="grid">
                 <div class="card" onclick="openBooking('Hatha Flow')">
@@ -373,7 +719,7 @@
         </section>
 
         <!-- UPCOMING EVENT SECTION -->
-        <section class="event-section">
+        <section class="event-section" id="event">
             <h2 id="event-heading">Upcoming Event</h2>
             <div class="event-card">
                 <span class="event-date" id="event-date">Saturday, October 26th, 2024 | 10:00 - 13:00</span>
@@ -383,25 +729,95 @@
             </div>
         </section>
 
-        <!-- NEW: TRAINERS SECTION -->
-        <section class="trainers-section">
+        <!-- TRAINERS SECTION -->
+        <section class="trainers-section" id="trainers">
             <h2>Meet Our Dedicated Instructors</h2>
             <div class="trainer-grid">
                 <div class="trainer-card">
-                    <img src="https://images.unsplash.com/photo-1571019624580-6c946ee1f335?auto=format&fit=crop&w=300&q=80" alt="Anjali Sharma - Lead Yoga Instructor"> <!-- IMPORTANT: Replace with actual trainer image -->
+                    <img src="https://images.unsplash.com/photo-1571019624580-6c946ee1f335?auto=format&fit=crop&w=300&q=80" alt="Anjali Sharma - Lead Yoga Instructor">
                     <h3>Anjali Sharma</h3>
                     <span>Lead Yoga Instructor</span>
                     <p>Anjali brings over 10 years of experience in Hatha and Vinyasa yoga, with a passion for holistic well-being and mindful movement. Her classes focus on alignment, breath, and inner peace.</p>
                 </div>
-                <!-- You can duplicate the .trainer-card div above for more trainers -->
-                <!-- Example for a second trainer:
                 <div class="trainer-card">
                     <img src="https://images.unsplash.com/photo-1544367527-d4615392e213?auto=format&fit=crop&w=300&q=80" alt="Rohan Singh - Vinyasa Specialist">
                     <h3>Rohan Singh</h3>
                     <span>Vinyasa Specialist</span>
                     <p>Rohan's dynamic Vinyasa flows are designed to build strength and flexibility, inspiring students to explore their full potential on the mat.</p>
                 </div>
-                -->
+                <!-- Add more trainers here by duplicating the .trainer-card div -->
+            </div>
+        </section>
+
+        <!-- NEW: TESTIMONIALS SECTION -->
+        <section class="testimonials-section" id="testimonials">
+            <h2>What Our Students Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>"Yog Shala has transformed my practice. The instructors are incredibly knowledgeable and create such a supportive atmosphere. I always leave feeling refreshed and centered."</p>
+                    <span class="author">- Priya K.</span>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>"I'm new to yoga, and this studio has been so welcoming. The Hatha Flow classes are perfect for beginners, and I've already noticed a huge improvement in my flexibility."</p>
+                    <span class="author">- Max S.</span>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>"The Vinyasa classes are challenging but so rewarding. It's truly a sanctuary where I can escape the city's hustle and reconnect with myself."</p>
+                    <span class="author">- Lena M.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: GALLERY SECTION -->
+        <section class="gallery-section" id="gallery">
+            <h2>Our Space & Practice</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1582213813352-70b9911e3708?auto=format&fit=crop&w=600&q=80" alt="Serene yoga studio interior with natural light">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1545389336-cf090694ff20?auto=format&fit=crop&w=600&q=80" alt="Yoga class in session, students in warrior pose">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552083974-bc899b17173e?auto=format&fit=crop&w=600&q=80" alt="Meditation session with instructor guiding">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80" alt="Close-up of yoga mats and props">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571019624580-6c946ee1f335?auto=format&fit=crop&w=600&q=80" alt="Instructor demonstrating a yoga pose">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1540759786491-ab606f8b8b5d?auto=format&fit=crop&w=600&q=80" alt="Peaceful studio corner with plants">
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: CONTACT SECTION -->
+        <section class="contact-section" id="contact">
+            <h2>Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Visit Us or Reach Out</h3>
+                    <p><i class="fa-solid fa-location-dot"></i> Your Street Address, Your Postal Code, Stuttgart, Germany</p>
+                    <p><i class="fa-solid fa-phone"></i> +49-Your-Phone-Number</p>
+                    <p><i class="fa-solid fa-envelope"></i> info@yourwebsite.com</p>
+                    <div class="contact-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.908298717904!2d9.17699171595159!3d48.77584507928929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db3d4d3e8e7b%3A0x1d4a0b3f8e5f0b3!2sStuttgart%2C%20Germany!5e0!3m2!1sen!2sde!4v1678912345678!5m2!1sen!2sde" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <h3>Send Us a Message</h3>
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
             </div>
         </section>
 
@@ -423,7 +839,11 @@
                         <input type="email" name="email" id="userEmail" placeholder="Email Address" required>
                         <input type="tel" name="phone" id="userPhone" placeholder="Phone Number (optional)"> 
                         <input type="date" id="bookingDate" required>
-                        <button type="submit" class="submit-btn" id="form-btn">Confirm & Reserve</button>
+                        <button type="submit" class="submit-btn" id="form-btn">
+                            Confirm & Reserve
+                            <span class="spinner" style="display:none;"></span>
+                        </button>
+                        <div id="bookingFormMessage" class="form-message" style="display:none;"></div>
                     </form>
                 </div>
             </div>
@@ -436,8 +856,10 @@
 
     <script>
         // --- CONFIGURATION ---
-        // Replace this with your actual SheetDB API URL
-        const API_URL = "https://sheetdb.io/api/v1/jigyhyj6enowg"; 
+        // Replace this with your actual SheetDB API URL for bookings
+        const BOOKING_API_URL = "https://sheetdb.io/api/v1/jigyhyj6enowg"; 
+        // Replace this with your actual SheetDB API URL for contact form submissions
+        const CONTACT_API_URL = "https://sheetdb.io/api/v1/YOUR_CONTACT_FORM_SHEETDB_ID"; // IMPORTANT: Create a separate SheetDB for contact messages!
 
         let takenMats = [];
         let selectedMat = null;
@@ -451,27 +873,20 @@
             });
         }
 
-        // --- 1. Fetch Real-Time Data ---
+        // --- 1. Fetch Real-Time Data (for Mats) ---
         async function fetchBookedMats() {
-            console.log("7. fetchBookedMats() called."); // ADDED FOR DEBUGGING
             document.getElementById('loadingText').innerText = "Checking availability...";
             try {
-                console.log("8. Attempting to fetch from API_URL:", API_URL); // ADDED FOR DEBUGGING
-                const response = await fetch(API_URL);
-                console.log("9. Fetch response received:", response); // ADDED FOR DEBUGGING
+                const response = await fetch(BOOKING_API_URL);
                 if (!response.ok) {
-                    console.error("10. Fetch response not OK:", response.status, response.statusText); // ADDED FOR DEBUGGING
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log("11. Data parsed from JSON:", data); // ADDED FOR DEBUGGING
-                // Ensure 'token' column exists in your Google Sheet for cancellation to work
                 takenMats = data.map(entry => parseInt(entry.mat_id));
-                console.log("12. Taken mats identified:", takenMats); // ADDED FOR DEBUGGING
                 renderMats();
                 document.getElementById('loadingText').innerText = "Studio Synced ✓";
             } catch (error) {
-                console.error("13. Error fetching data:", error); // ADDED FOR DEBUGGING
+                console.error("Error fetching data:", error);
                 document.getElementById('loadingText').innerText = "Offline Mode (Local)";
                 renderMats();
             }
@@ -493,13 +908,15 @@
         // --- 2. Handle Booking (Push to Cloud) ---
         async function handleFormSubmit(e) {
             e.preventDefault();
-            console.log("16. handleFormSubmit() called."); // ADDED FOR DEBUGGING
             const btn = document.getElementById('form-btn');
-            btn.disabled = true;
-            btn.innerText = "Reserving...";
+            const spinner = btn.querySelector('.spinner');
+            const formMessage = document.getElementById('bookingFormMessage');
 
-            const bookingToken = generateUUID(); // Generate unique token
-            // Construct cancellation link using the current origin and the new cancel.html page
+            btn.disabled = true;
+            spinner.style.display = 'inline-block';
+            formMessage.style.display = 'none';
+
+            const bookingToken = generateUUID(); 
             const cancellationLink = `${window.location.origin}/cancel.html?token=${bookingToken}`; 
 
             const bookingData = {
@@ -507,100 +924,177 @@
                     mat_id: selectedMat,
                     name: document.getElementById('userName').value,
                     email: document.getElementById('userEmail').value,
-                    phone: document.getElementById('userPhone').value, // Included phone number
+                    phone: document.getElementById('userPhone').value,
                     class: selectedClass,
                     date: document.getElementById('bookingDate').value,
-                    token: bookingToken // Add the generated token here
+                    token: bookingToken
                 }]
             };
-            console.log("17. Booking data prepared:", bookingData); // ADDED FOR DEBUGGING
 
             try {
-                console.log("18. Attempting to POST to API_URL:", API_URL); // ADDED FOR DEBUGGING
-                const response = await fetch(API_URL, {
+                const response = await fetch(BOOKING_API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(bookingData)
                 });
-                console.log("19. POST response received:", response); // ADDED FOR DEBUGGING
 
                 if (response.ok) {
-                    console.log("20. POST request successful!"); // ADDED FOR DEBUGGING
-                    alert(
-                        "Namaste! Mat #" + selectedMat + " is now officially reserved for you." +
-                        "\n\nTo cancel your booking, please use this link (keep it safe!):" +
-                        "\n" + cancellationLink
-                    );
-                    closeModal();
-                    fetchBookedMats(); // Refresh the grid for everyone
+                    formMessage.className = 'form-message success';
+                    formMessage.innerText = "Namaste! Mat #" + selectedMat + " is now officially reserved for you. Please check your email for confirmation and cancellation link.";
+                    formMessage.style.display = 'block';
+                    // Instead of alert, display message in modal
+                    // alert(
+                    //     "Namaste! Mat #" + selectedMat + " is now officially reserved for you." +
+                    //     "\n\nTo cancel your booking, please use this link (keep it safe!):" +
+                    //     "\n" + cancellationLink
+                    // );
+                    // Optionally, you might want to send this cancellation link via email to the user
+                    // For now, we'll just display a success message and then close the modal after a delay
+                    setTimeout(() => {
+                        closeModal();
+                        fetchBookedMats(); // Refresh the grid for everyone
+                        formMessage.style.display = 'none'; // Hide message for next booking
+                    }, 5000); // Close after 5 seconds
                 } else {
-                    console.error("20. POST request failed:", response.status, response.statusText); // ADDED FOR DEBUGGING
-                    alert("Booking failed. Server responded with: " + response.status + " " + response.statusText);
+                    const errorText = await response.text();
+                    formMessage.className = 'form-message error';
+                    formMessage.innerText = "Booking failed. Server responded with: " + response.status + " " + errorText;
+                    formMessage.style.display = 'block';
+                    console.error("POST request failed:", response.status, errorText);
                 }
             } catch (error) {
-                console.error("21. Error during POST request:", error); // ADDED FOR DEBUGGING
-                alert("Connection error. Please try again.");
+                formMessage.className = 'form-message error';
+                formMessage.innerText = "Connection error. Please try again.";
+                formMessage.style.display = 'block';
+                console.error("Error during POST request:", error);
             } finally {
-                    btn.disabled = false;
-                    btn.innerText = "Confirm & Reserve";
-                    console.log("22. Form submission process finished."); // ADDED FOR DEBUGGING
-                }
+                btn.disabled = false;
+                spinner.style.display = 'none';
             }
+        }
+
+        // --- Handle Contact Form Submission ---
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerText;
+
+            submitButton.disabled = true;
+            submitButton.innerText = 'Sending...';
+
+            const contactData = {
+                data: [{
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    message: formData.get('message'),
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                const response = await fetch(CONTACT_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(contactData)
+                });
+
+                if (response.ok) {
+                    alert("Thank you for your message! We'll get back to you soon.");
+                    form.reset(); // Clear the form
+                } else {
+                    const errorText = await response.text();
+                    alert("Failed to send message. Please try again. Error: " + errorText);
+                    console.error("Contact form submission failed:", response.status, errorText);
+                }
+            } catch (error) {
+                alert("Connection error. Please try again.");
+                console.error("Error during contact form submission:", error);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerText = originalButtonText;
+            }
+        });
 
         // --- UI Logic ---
         function checkPreferences() {
-            console.log("1. checkPreferences() called on page load."); // ADDED FOR DEBUGGING
             const savedLang = localStorage.getItem('auraLang');
             if (savedLang) {
-                console.log("2. Saved language found:", savedLang); // ADDED FOR DEBUGGING
                 setLanguage(savedLang);
             } else {
-                console.log("2. No saved language found, language overlay should be visible."); // ADDED FOR DEBUGGING
+                document.getElementById('langOverlay').style.display = 'flex';
+            }
+
+            // Check cookie consent
+            if (localStorage.getItem('cookieConsent') === 'accepted') {
+                document.getElementById('cookieConsentBanner').style.display = 'none';
+            } else {
+                document.getElementById('cookieConsentBanner').style.display = 'flex';
             }
         }
 
         function setLanguage(lang) {
-            console.log("3. setLanguage() called with:", lang); // ADDED FOR DEBUGGING
             localStorage.setItem('auraLang', lang);
             document.getElementById('langOverlay').style.display = 'none';
             document.getElementById('mainContent').style.opacity = '1';
             document.getElementById('currentLangTag').innerText = lang;
-            console.log("4. Language set, overlay hidden, main content visible."); // ADDED FOR DEBUGGING
+            // In a real multi-language site, you'd load different text content here
         }
 
         function openBooking(cls) {
-            console.log("5. openBooking() called for class:", cls); // ADDED FOR DEBUGGING
             selectedClass = cls;
             document.getElementById('bookingModal').style.display = 'flex';
             document.getElementById('step1').style.display = 'block';
             document.getElementById('step2').style.display = 'none';
-            fetchBookedMats(); // Fetch fresh data every time modal opens
-            console.log("6. Booking modal opened, calling fetchBookedMats()."); // ADDED FOR DEBUGGING
+            document.getElementById('bookingFormMessage').style.display = 'none'; // Hide previous messages
+            fetchBookedMats(); 
         }
 
         function selectMat(num) {
-            console.log("14. Mat selected:", num); // ADDED FOR DEBUGGING
             selectedMat = num;
             document.getElementById('selection-summary').innerText = selectedClass + " | Mat #" + num;
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
-            console.log("15. Moving to step 2 (registration form)."); // ADDED FOR DEBUGGING
         }
 
         function closeModal() { 
             document.getElementById('bookingModal').style.display = 'none'; 
-            console.log("Modal closed."); // ADDED FOR DEBUGGING
+            // Reset form and messages when closing
+            document.getElementById('yogaForm').reset();
+            document.getElementById('bookingFormMessage').style.display = 'none';
         }
         
         const audio = document.getElementById('zenAudio');
         function toggleMusic() {
             if (audio.paused) { 
                 audio.play(); 
-                console.log("Music started."); // ADDED FOR DEBUGGING
             } else { 
                 audio.pause(); 
-                console.log("Music paused."); // ADDED FOR DEBUGGING
             }
+        }
+
+        // Hamburger menu toggle
+        function toggleNav() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.getElementById('navLinks').classList.remove('active'); // Close menu on click
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Cookie Consent Logic
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieConsentBanner').style.display = 'none';
         }
     </script>
 </body>
