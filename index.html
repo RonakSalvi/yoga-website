@@ -88,6 +88,60 @@
         .card { background: var(--white); padding: 40px; border-radius: 30px; border: 1px solid var(--secondary); cursor: pointer; transition: 0.3s; }
         .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(150, 123, 182, 0.1); }
 
+        /* --- Upcoming Event Section --- */
+        .event-section {
+            background-color: var(--primary); /* Use your primary color for emphasis */
+            color: var(--white);
+            padding: 60px 10%;
+            text-align: center;
+        }
+        .event-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .event-card {
+            background: rgba(255, 255, 255, 0.15); /* Slightly transparent white */
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .event-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        .event-card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .event-card .event-date {
+            font-weight: 600;
+            color: var(--secondary); /* Light color for date */
+            margin-bottom: 10px;
+            display: block;
+        }
+        .event-card .event-btn {
+            background: var(--secondary); /* Use a contrasting color for the button */
+            color: var(--primary-dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none; /* For anchor tag */
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .event-card .event-btn:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
         /* --- Music Player --- */
         .music-control {
             position: fixed; bottom: 30px; right: 30px; z-index: 3000;
@@ -160,6 +214,36 @@
             }
           }
         ]
+      },
+      "event": {
+        "@type": "Event",
+        "name": "Mindfulness & Meditation Workshop",
+        "startDate": "2024-10-26T10:00:00",
+        "endDate": "2024-10-26T13:00:00",
+        "location": {
+          "@type": "Place",
+          "name": "Yog Shala Studio Stuttgart",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Your Street Address",
+            "addressLocality": "Stuttgart",
+            "postalCode": "Your Postal Code",
+            "addressCountry": "DE"
+          }
+        },
+        "description": "Deepen your practice with a special workshop focused on mindfulness and meditation techniques to cultivate inner peace and focus. Suitable for all levels.",
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.yourwebsite.com/event-registration.html", <!-- IMPORTANT: Link to your event registration page -->
+          "price": "45.00",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "validFrom": "2024-09-01"
+        },
+        "performer": {
+          "@type": "Person",
+          "name": "Guest Instructor Name" <!-- IMPORTANT: Name of the event instructor -->
+        }
       }
     }
     </script>
@@ -215,6 +299,17 @@
                     <h3 id="c2-t">Vinyasa</h3>
                     <p id="c2-d">Energetic flow.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- NEW: UPCOMING EVENT SECTION -->
+        <section class="event-section">
+            <h2 id="event-heading">Upcoming Event</h2>
+            <div class="event-card">
+                <span class="event-date" id="event-date">Saturday, October 26th, 2024 | 10:00 - 13:00</span>
+                <h3 id="event-title">Mindfulness & Meditation Workshop</h3>
+                <p id="event-description">Deepen your practice with a special workshop focused on mindfulness and meditation techniques to cultivate inner peace and focus. Suitable for all levels.</p>
+                <a href="https://www.yourwebsite.com/event-registration.html" target="_blank" class="event-btn" id="event-cta">Learn More & Register</a>
             </div>
         </section>
 
