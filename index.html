@@ -142,6 +142,65 @@
             color: var(--primary);
         }
 
+        /* --- Trainers Section --- */
+        .trainers-section {
+            padding: 80px 10%;
+            text-align: center;
+            background-color: var(--bg-light);
+        }
+        .trainers-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-dark);
+        }
+        .trainer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+        .trainer-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(150, 123, 182, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .trainer-card:hover {
+            transform: translateY(-5px);
+        }
+        .trainer-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 0 5px rgba(150, 123, 182, 0.2);
+        }
+        .trainer-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        .trainer-card span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .trainer-card p {
+            font-size: 1rem;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
         /* --- Music Player --- */
         .music-control {
             position: fixed; bottom: 30px; right: 30px; z-index: 3000;
@@ -244,7 +303,18 @@
           "@type": "Person",
           "name": "Guest Instructor Name" <!-- IMPORTANT: Name of the event instructor -->
         }
-      }
+      },
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Anjali Sharma",
+          "jobTitle": "Lead Yoga Instructor",
+          "description": "Anjali brings over 10 years of experience in Hatha and Vinyasa yoga, with a passion for holistic well-being and mindful movement.",
+          "image": "https://www.yourwebsite.com/images/anjali-sharma.jpg", <!-- IMPORTANT: Link to trainer's photo -->
+          "url": "https://www.yourwebsite.com/trainers/anjali-sharma.html" <!-- Optional: Link to a dedicated trainer page -->
+        }
+        // Add more trainers here if needed
+      ]
     }
     </script>
 </head>
@@ -302,7 +372,7 @@
             </div>
         </section>
 
-        <!-- NEW: UPCOMING EVENT SECTION -->
+        <!-- UPCOMING EVENT SECTION -->
         <section class="event-section">
             <h2 id="event-heading">Upcoming Event</h2>
             <div class="event-card">
@@ -310,6 +380,28 @@
                 <h3 id="event-title">Mindfulness & Meditation Workshop</h3>
                 <p id="event-description">Deepen your practice with a special workshop focused on mindfulness and meditation techniques to cultivate inner peace and focus. Suitable for all levels.</p>
                 <a href="https://www.yourwebsite.com/event-registration.html" target="_blank" class="event-btn" id="event-cta">Learn More & Register</a>
+            </div>
+        </section>
+
+        <!-- NEW: TRAINERS SECTION -->
+        <section class="trainers-section">
+            <h2>Meet Our Dedicated Instructors</h2>
+            <div class="trainer-grid">
+                <div class="trainer-card">
+                    <img src="https://images.unsplash.com/photo-1571019624580-6c946ee1f335?auto=format&fit=crop&w=300&q=80" alt="Anjali Sharma - Lead Yoga Instructor"> <!-- IMPORTANT: Replace with actual trainer image -->
+                    <h3>Anjali Sharma</h3>
+                    <span>Lead Yoga Instructor</span>
+                    <p>Anjali brings over 10 years of experience in Hatha and Vinyasa yoga, with a passion for holistic well-being and mindful movement. Her classes focus on alignment, breath, and inner peace.</p>
+                </div>
+                <!-- You can duplicate the .trainer-card div above for more trainers -->
+                <!-- Example for a second trainer:
+                <div class="trainer-card">
+                    <img src="https://images.unsplash.com/photo-1544367527-d4615392e213?auto=format&fit=crop&w=300&q=80" alt="Rohan Singh - Vinyasa Specialist">
+                    <h3>Rohan Singh</h3>
+                    <span>Vinyasa Specialist</span>
+                    <p>Rohan's dynamic Vinyasa flows are designed to build strength and flexibility, inspiring students to explore their full potential on the mat.</p>
+                </div>
+                -->
             </div>
         </section>
 
